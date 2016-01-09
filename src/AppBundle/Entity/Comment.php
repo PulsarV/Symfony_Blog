@@ -44,12 +44,12 @@ class Comment
     private $commentator;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Artice", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
      */
     private $article;
 
     /**
-     * @Gedmo\Slug(fields={"article", "commentator"})
+     * @Gedmo\Slug(fields={"message"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
@@ -116,11 +116,11 @@ class Comment
     /**
      * Set article
      *
-     * @param Artice $article
+     * @param Article $article
      *
      * @return Comment
      */
-    public function setArticle(Artice $article = null)
+    public function setArticle(Article $article = null)
     {
         $this->article = $article;
 
@@ -130,7 +130,7 @@ class Comment
     /**
      * Get article
      *
-     * @return Artice
+     * @return Article
      */
     public function getArticle()
     {

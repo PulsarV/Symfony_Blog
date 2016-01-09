@@ -74,7 +74,7 @@ class Author
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Artice", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
      */
     private $articles;
 
@@ -247,11 +247,11 @@ class Author
     /**
      * Add article
      *
-     * @param Artice $article
+     * @param Article $article
      *
      * @return Author
      */
-    public function addArticle(Artice $article)
+    public function addArticle(Article $article)
     {
         $this->articles[] = $article;
 
@@ -261,9 +261,9 @@ class Author
     /**
      * Remove article
      *
-     * @param Artice $article
+     * @param Article $article
      */
-    public function removeArticle(Artice $article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }

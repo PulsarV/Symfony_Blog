@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,12 +9,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Artice
+ * Article
  *
- * @ORM\Table(name="artice")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticeRepository")
+ * @ORM\Table(name="article")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
  */
-class Artice
+class Article
 {
     /**
      * Hook timestampable behavior
@@ -115,7 +114,7 @@ class Artice
      *
      * @param string $title
      *
-     * @return Artice
+     * @return Article
      */
     public function setTitle($title)
     {
@@ -139,7 +138,7 @@ class Artice
      *
      * @param string $titleImage
      *
-     * @return Artice
+     * @return Article
      */
     public function setTitleImage($titleImage)
     {
@@ -163,7 +162,7 @@ class Artice
      *
      * @param string $content
      *
-     * @return Artice
+     * @return Article
      */
     public function setContent($content)
     {
@@ -187,7 +186,7 @@ class Artice
      *
      * @param integer $rating
      *
-     * @return Artice
+     * @return Article
      */
     public function setRating($rating)
     {
@@ -211,7 +210,7 @@ class Artice
      *
      * @param integer $viewsCount
      *
-     * @return Artice
+     * @return Article
      */
     public function setViewsCount($viewsCount)
     {
@@ -235,7 +234,7 @@ class Artice
      *
      * @param Category $category
      *
-     * @return Artice
+     * @return Article
      */
 
     /**
@@ -243,7 +242,7 @@ class Artice
      *
      * @param Author $author
      *
-     * @return Artice
+     * @return Article
      */
     public function setAuthor(Author $author = null)
     {
@@ -267,7 +266,7 @@ class Artice
      *
      * @param Category $category
      *
-     * @return Artice
+     * @return Article
      */
     public function setCategory(Category $category = null)
     {
@@ -291,7 +290,7 @@ class Artice
      *
      * @param Comment $comment
      *
-     * @return Artice
+     * @return Article
      */
     public function addComment(Comment $comment)
     {
@@ -325,7 +324,7 @@ class Artice
      *
      * @param Tag $tag
      *
-     * @return Artice
+     * @return Article
      */
     public function addTag(Tag $tag)
     {
@@ -360,7 +359,7 @@ class Artice
      *
      * @param string $slug
      *
-     * @return Artice
+     * @return Article
      */
     public function setSlug($slug)
     {

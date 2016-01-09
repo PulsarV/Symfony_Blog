@@ -39,7 +39,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Artice", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
      */
     private $articles;
 
@@ -92,11 +92,11 @@ class Category
     /**
      * Add article
      *
-     * @param Artice $article
+     * @param Article $article
      *
      * @return Category
      */
-    public function addArticle(Artice $article)
+    public function addArticle(Article $article)
     {
         $this->articles[] = $article;
 
@@ -106,9 +106,9 @@ class Category
     /**
      * Remove article
      *
-     * @param Artice $article
+     * @param Article $article
      */
-    public function removeArticle(Artice $article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }

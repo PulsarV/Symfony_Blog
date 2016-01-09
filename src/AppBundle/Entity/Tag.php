@@ -39,7 +39,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Artice", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
      * @ORM\JoinTable(name="tags_articles")
      */
     private $articles;
@@ -93,11 +93,11 @@ class Tag
     /**
      * Add article
      *
-     * @param Artice $article
+     * @param Article $article
      *
      * @return Tag
      */
-    public function addArticle(Artice $article)
+    public function addArticle(Article $article)
     {
         $this->articles[] = $article;
 
@@ -107,9 +107,9 @@ class Tag
     /**
      * Remove article
      *
-     * @param Artice $article
+     * @param Article $article
      */
-    public function removeArticle(Artice $article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }
