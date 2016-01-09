@@ -1,0 +1,23 @@
+{
+  "name": "blog",
+  "description": "Simple blog",
+  "main": "index.js",
+  "authors": [
+    "Volodymyr Kravchuk"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
