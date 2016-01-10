@@ -6,7 +6,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
-//todo: add subcomment
+//todo: add comment reply
 
 /**
  * Comment

@@ -1,7 +1,7 @@
 AppBundle\Entity\Author:
   author{0..5}:
-    name: <firstName()>
-    surname: <lastName()>
+    firstname: <firstName()>
+    lastname: <lastName()>
     birthday: <(new \DateTime($fake('date')))>
     address: <address()>
     nickname(unique): <userName()>
@@ -14,39 +14,25 @@ AppBundle\Entity\Commentator:
 
 AppBundle\Entity\Category:
   category{0..12}:
-    name: <text(30)>
+    name: <text(255)>
 
 AppBundle\Entity\Article:
   article{0..20}:
-    title: <text(30)>
-    titleImage: <text(30)>.png
+    title: <text(255)>
+    titleImage: <text(251)>.png
     content: <text(10000)>
-    rating: <randomNumber(8)>
-    viewsCount: <randomNumber(7)>
+    ratingCounter: <randomNumber(8)>
+    viewsCounter: <randomNumber(8)>
     author: @author*
     category: @category*
 
 AppBundle\Entity\Tag:
   tag{0..50}:
-    name: <text(30)>
+    name: <text(64)>
     articles: <numberBetween(1, 10)>x @article*
 
 AppBundle\Entity\Comment:
   comment{0..50}:
-    message: <text(200)>
+    message: <text(300)>
     commentator: @commentator*
     article: @article*
-
-
-#
-#AppBundle\Entity\Player:
-#  player{0..383}:
-#    name(unique): <firstNameMale()> <lastName()>
-#    description: <text(5000)>
-#    team: @team<(floor($fake('current') / 16))>
-#
-#AppBundle\Entity\Coach:
-#  coach{0..95}:
-#    name(unique): <firstNameMale()> <lastName()>
-#    description: <text(5000)>
-#    team: @team<(floor($fake('current') / 4))>

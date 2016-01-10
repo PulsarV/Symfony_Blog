@@ -34,16 +34,16 @@ class Author
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=30)
+     * @ORM\Column(name="firstname", type="string", length=64)
      */
-    private $name;
+    private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=30)
+     * @ORM\Column(name="lastname", type="string", length=64)
      */
-    private $surname;
+    private $lastname;
 
     /**
      * @var \DateTime
@@ -62,14 +62,14 @@ class Author
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=30, unique=true)
+     * @ORM\Column(name="nickname", type="string", length=60, unique=true)
      */
     private $nickname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=30, unique=true)
+     * @ORM\Column(name="email", type="string", length=129, unique=true)
      */
     private $email;
 
@@ -79,8 +79,8 @@ class Author
     private $articles;
 
     /**
-     * @Gedmo\Slug(fields={"name", "surname"})
-     * @ORM\Column(name="slug", type="string", length=128, unique=true)
+     * @Gedmo\Slug(fields={"firstname", "lastname"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -101,51 +101,51 @@ class Author
     }
 
     /**
-     * Set name
+     * Set firstname
      *
-     * @param string $name
+     * @param string $firstname
      *
      * @return Author
      */
-    public function setName($name)
+    public function setFirstname($firstname)
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get firstName
      *
      * @return string
      */
-    public function getName()
+    public function getFirstname()
     {
-        return $this->name;
+        return $this->firstname;
     }
 
     /**
-     * Set surname
+     * Set lastname
      *
-     * @param string $surname
+     * @param string $lastname
      *
      * @return Author
      */
-    public function setSurname($surname)
+    public function setLastname($lastname)
     {
-        $this->surname = $surname;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get surname
+     * Get lastname
      *
      * @return string
      */
-    public function getSurname()
+    public function getLastname()
     {
-        return $this->surname;
+        return $this->lastname;
     }
 
     /**

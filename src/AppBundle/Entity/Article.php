@@ -41,7 +41,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="titleImage", type="string", length=255, nullable=true)
+     * @ORM\Column(name="title_image", type="string", length=255, nullable=true)
      */
     private $titleImage;
 
@@ -55,16 +55,16 @@ class Article
     /**
      * @var int
      *
-     * @ORM\Column(name="rating", type="bigint")
+     * @ORM\Column(name="rating_counter", type="bigint")
      */
-    private $rating;
+    private $ratingCounter;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="viewsCount", type="bigint")
+     * @ORM\Column(name="views_counter", type="bigint")
      */
-    private $viewsCount;
+    private $viewsCounter;
 
     /**
      * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
@@ -88,7 +88,7 @@ class Article
 
     /**
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(name="slug", type="string", length=128, unique=true)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -182,51 +182,51 @@ class Article
     }
 
     /**
-     * Set rating
+     * Set ratingCounter
      *
-     * @param integer $rating
+     * @param integer $ratingCounter
      *
      * @return Article
      */
-    public function setRating($rating)
+    public function setRatingCounter($ratingCounter)
     {
-        $this->rating = $rating;
+        $this->ratingCounter = $ratingCounter;
 
         return $this;
     }
 
     /**
-     * Get rating
+     * Get ratingCounter
      *
      * @return int
      */
-    public function getRating()
+    public function getRatingCounter()
     {
-        return $this->rating;
+        return $this->ratingCounter;
     }
 
     /**
-     * Set viewsCount
+     * Set viewsCounter
      *
-     * @param integer $viewsCount
+     * @param integer $viewsCounter
      *
      * @return Article
      */
-    public function setViewsCount($viewsCount)
+    public function setViewsCounter($viewsCounter)
     {
-        $this->viewsCount = $viewsCount;
+        $this->viewsCounter = $viewsCounter;
 
         return $this;
     }
 
     /**
-     * Get viewsCount
+     * Get viewsCounter
      *
      * @return int
      */
-    public function getViewsCount()
+    public function getViewsCounter()
     {
-        return $this->viewsCount;
+        return $this->viewsCounter;
     }
 
     /**

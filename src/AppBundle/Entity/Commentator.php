@@ -34,14 +34,14 @@ class Commentator
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=60)
+     * @ORM\Column(name="name", type="string", length=129)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=30)
+     * @ORM\Column(name="email", type="string", length=129)
      */
     private $email;
 
@@ -52,7 +52,7 @@ class Commentator
 
     /**
      * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(name="slug", type="string", length=128, unique=true)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 

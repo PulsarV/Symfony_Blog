@@ -25,14 +25,14 @@ echo
 echo SETUP DATABASE ...
 echo ==================
 
-#./app/console doctrine:database:create
-#./app/console doctrine:schema:update --force
+./app/console doctrine:database:create
+./app/console doctrine:schema:update --force
 
 echo 
 echo LOAD FIXTURES ...
 echo =================
 
-#./app/console hautelook_alice:doctrine:fixtures:load --no-interaction
+./app/console hautelook_alice:doctrine:fixtures:load --no-interaction
 
 echo 
 echo =======================
