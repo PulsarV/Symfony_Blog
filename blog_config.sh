@@ -19,7 +19,7 @@ echo ==================
 sudo apt-get install nodejs
 npm install -S bower gulp less gulp-less gulp-clean gulp-concat gulp-uglify
 ./node_modules/.bin/bower install -S bootstrap
-#./node_modules/.bin/gulp
+./node_modules/.bin/gulp
 
 echo 
 echo SETUP DATABASE ...
