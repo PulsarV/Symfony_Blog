@@ -18,9 +18,9 @@ AppBundle\Entity\Category:
 
 AppBundle\Entity\Article:
   article{0..20}:
-    title: <text(255)>
-    titleImage: <text(251)>.png
-    content: <text(10000)>
+    title: <text(25)>
+    titleImage: <text(25)>.png
+    content: <><text(1000)>
     ratingCounter: <randomNumber(8)>
     viewsCounter: <randomNumber(8)>
     author: @author*

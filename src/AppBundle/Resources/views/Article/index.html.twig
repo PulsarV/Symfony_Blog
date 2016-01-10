@@ -1,0 +1,46 @@
+{% extends '::base_with_sidebar.html.twig' %}
+
+{% block content %}
+    {% for article in articles%}
+        <div class="blog-post blog-single-post">
+            <div class="single-post-title">
+                <h3>{{ article.title }}</h3>
+            </div>
+            <div class="single-post-info">
+                <i class="glyphicon glyphicon-time"></i>{{ article.createdAt|date("d M, Y") }} <a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
+            </div>
+            <div class="single-post-image">
+                <img src="{{ asset('images/blog-large.jpg') }}" alt="Post Title">
+            </div>
+            <div class="single-post-content">
+
+                   {{ article.content|slice(0, 800) }}
+
+            </div>
+        </div>
+    {% endfor %}
+    <!-- Pagination -->
+    <div class="pagination-wrapper ">
+        <ul class="pagination pagination-sm">
+            {% if page > 1 %}
+                <li><a href="{{ path('articleindex', {'page': page - 1 }) }}">Previous</a></li>
+            {% else %}
+                <li class="disabled"><a href="">Previous</a></li>
+            {% endif %}
+
+            {% for i in 1..pagesCount %}
+                {% if i == page %}
+                    <li class="active"><a href="">{{ i }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('articleindex', {'page': i }) }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page < pagesCount %}
+                <li><a href="{{ path('articleindex', {'page': page + 1 }) }}">Next</a></li>
+            {% else %}
+                <li class="disabled"><a href="">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
