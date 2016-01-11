@@ -230,12 +230,29 @@ class Article
     }
 
     /**
-     * Set category
+     * Set rating
      *
-     * @param Category $category
+     * @param integer $rating
      *
      * @return Article
      */
+    public function setRating($rating)
+    {
+        $this->ratingCounter += $rating;
+        $this->viewsCounter += 1;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return float
+     */
+    public function getRating()
+    {
+        return $this->ratingCounter / $this->viewsCounter;
+    }
 
     /**
      * Set author

@@ -1,0 +1,32 @@
+{% extends '::base_with_sidebar.html.twig' %}
+
+{% block content %}
+    {% if article %}
+        <div class="blog-post">
+            <div class="post-title">
+                <h3>{{ article.title }}</h3>
+            </div>
+            <div class="post-info top-info-block">
+                <i class="glyphicon glyphicon-user"></i><a href="">{{ article.author.nickname }}</a>&nbsp;&nbsp;<i class="glyphicon glyphicon-time"></i>{{ article.createdAt|date("d M, Y") }}&nbsp;&nbsp;<i class="glyphicon glyphicon-star-empty"></i>{{ article.rating|number_format(2, '.', '') }}&nbsp;&nbsp;<a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
+            </div>
+            <div class="post-image">
+                <img src="{{ asset('images/blog-large.jpg') }}" alt="Post Title">
+            </div>
+            <div class="post-content">
+                {{ article.content }}
+            </div>
+            <div class="post-info bottom-info-block">
+                <i class="glyphicon glyphicon-folder-open"></i> <a href="">{{ article.category.name }}</a>
+                <br><br>
+                <i class="glyphicon glyphicon-tags"></i>
+                {% for tag in article.tags %}
+                    <a href="">{{ tag.name }}</a>&nbsp;
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="blog-post">
+            <h1>Error!</h1>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -13,13 +13,23 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ArticleRepository extends EntityRepository
 {
-    public function getPaginatedArticle($first, $max)
+    public function findAllArticlesPaginated($first, $max)
     {
-        $dql = "SELECT art, aut
+        $dql = "SELECT art, aut, cat, tags
                 FROM AppBundle:Article art
                 JOIN art.author aut
+                JOIN art.category cat
+                JOIN art.tags tags
                 ORDER BY art.createdAt DESC";
 
         return new Paginator($this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max));
+    }
+
+    public function findArticleBySlug($slug)
+    {
+        $dql = "SELECT art
+                FROM AppBundle:Article art
+                WHERE art.slug = :slug";
+        return $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->getOneOrNullResult();
     }
 }

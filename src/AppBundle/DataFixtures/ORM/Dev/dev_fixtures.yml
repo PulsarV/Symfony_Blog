@@ -14,21 +14,21 @@ AppBundle\Entity\Commentator:
 
 AppBundle\Entity\Category:
   category{0..12}:
-    name: <text(255)>
+    name(unique): <sentence()>
 
 AppBundle\Entity\Article:
   article{0..20}:
-    title: <text(25)>
+    title: <sentence()>
     titleImage: <text(25)>.png
-    content: <><text(1000)>
-    ratingCounter: <randomNumber(8)>
+    content: <text(10000)>
     viewsCounter: <randomNumber(8)>
+    ratingCounter: <numberBetween(0, $viewsCounter * 5)>
     author: @author*
     category: @category*
 
 AppBundle\Entity\Tag:
   tag{0..50}:
-    name: <text(64)>
+    name(unique): <word()>
     articles: <numberBetween(1, 10)>x @article*
 
 AppBundle\Entity\Comment:

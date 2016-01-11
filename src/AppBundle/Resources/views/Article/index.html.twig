@@ -2,20 +2,29 @@
 
 {% block content %}
     {% for article in articles%}
-        <div class="blog-post blog-single-post">
-            <div class="single-post-title">
-                <h3>{{ article.title }}</h3>
+        <div class="blog-post">
+            <div class="post-title">
+                <h3><a href="{{ path('articleshow', {'slug': article.slug }) }}">{{ article.title }}</a></h3>
             </div>
-            <div class="single-post-info">
-                <i class="glyphicon glyphicon-time"></i>{{ article.createdAt|date("d M, Y") }} <a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
+            <div class="post-info top-info-block">
+                <i class="glyphicon glyphicon-user"></i><a href="">{{ article.author.nickname }}</a>&nbsp;&nbsp;<i class="glyphicon glyphicon-time"></i>{{ article.createdAt|date("d M, Y") }}&nbsp;&nbsp;<i class="glyphicon glyphicon-star-empty"></i>{{ article.rating|number_format(2, '.', '') }}&nbsp;&nbsp;<a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
             </div>
-            <div class="single-post-image">
+            <div class="post-image">
                 <img src="{{ asset('images/blog-large.jpg') }}" alt="Post Title">
             </div>
-            <div class="single-post-content">
-
+            <div class="post-content">
                    {{ article.content|slice(0, 800) }}
-
+            </div>
+            <div class="post-info bottom-info-block">
+                <i class="glyphicon glyphicon-folder-open"></i> <a href="">{{ article.category.name }}</a>
+                <br><br>
+                <i class="glyphicon glyphicon-tags"></i>
+                {% for tag in article.tags %}
+                    <a href="">{{ tag.name }}</a>&nbsp;
+                {% endfor %}
+            </div>
+            <div class="post-more">
+                <a href="{{ path('articleshow', {'slug': article.slug }) }}" class="btn btn-small">Read more</a>
             </div>
         </div>
     {% endfor %}
