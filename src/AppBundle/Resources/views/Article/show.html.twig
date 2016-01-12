@@ -7,7 +7,10 @@
                 <h3>{{ article.title }}</h3>
             </div>
             <div class="post-info top-info-block">
-                <i class="glyphicon glyphicon-user"></i><a href="">{{ article.author.nickname }}</a>&nbsp;&nbsp;<i class="glyphicon glyphicon-time"></i>{{ article.createdAt|date("d M, Y") }}&nbsp;&nbsp;<i class="glyphicon glyphicon-star-empty"></i>{{ article.rating|number_format(2, '.', '') }}&nbsp;&nbsp;<a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
+                <i class="glyphicon glyphicon-user"></i><a href="" title="Show posts by this author">{{ article.author.nickname }}</a>&nbsp;&nbsp;
+                <i class="glyphicon glyphicon-time"></i>{{ article.createdAt|date("d M, Y") }}&nbsp;&nbsp;
+                <i class="glyphicon glyphicon-star-empty"></i>{{ article.rating|number_format(2, '.', '') }}&nbsp;&nbsp;
+                <a href="#" title="Show comments"><i class="glyphicon glyphicon-comment"></i>{{ article.comments|length }}</a>
             </div>
             <div class="post-image">
                 <img src="{{ asset('images/blog-large.jpg') }}" alt="Post Title">
@@ -16,17 +19,17 @@
                 {{ article.content }}
             </div>
             <div class="post-info bottom-info-block">
-                <i class="glyphicon glyphicon-folder-open"></i> <a href="">{{ article.category.name }}</a>
-                <br><br>
+                <i class="glyphicon glyphicon-folder-open"></i> <a href="" title="Show all posts in this category">{{ article.category.name }}</a>
+                <br>
                 <i class="glyphicon glyphicon-tags"></i>
                 {% for tag in article.tags %}
-                    <a href="">{{ tag.name }}</a>&nbsp;
+                    <a href="" title="Show posts filtered by tag">{{ tag.name }}</a>&nbsp;
                 {% endfor %}
             </div>
         </div>
     {% else %}
         <div class="blog-post">
-            <h1>Error!</h1>
+            <h3>Error!</h3>
         </div>
     {% endif %}
 {% endblock %}

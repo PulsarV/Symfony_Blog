@@ -20,11 +20,12 @@ class ArticleController extends Controller
     public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
-        $articles = $em->getRepository('AppBundle:Article')->findAllArticlesPaginated(($page-1) * $this->articlesPerPage, $this->articlesPerPage);
+        $articles = $em->getRepository('AppBundle:Article')->findAllArticlesPaginated(($page - 1) * $this->articlesPerPage, $this->articlesPerPage);
+
         return [
             'articles' => $articles,
             'page' => $page,
-            'pagesCount' => ceil(count($articles)/$this->articlesPerPage),
+            'pagesCount' => ceil(count($articles) / $this->articlesPerPage),
         ];
     }
 
@@ -37,6 +38,7 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('AppBundle:Article')->findArticleBySlug($slug);
+
         return ['article' => $article];
     }
 }

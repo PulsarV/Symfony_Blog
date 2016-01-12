@@ -9,12 +9,11 @@
             </span>
         </div>
     </form>
-    <h4>Recent Posts</h4>
+    <h4>Top articles</h4>
     <ul class="recent-posts">
-        <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-        <li><a href="#">Sed sit amet metus sit</a></li>
-        <li><a href="#">Nunc et diam volutpat tellus ultrices</a></li>
-        <li><a href="#">Quisque sollicitudin cursus felis</a></li>
+        {% for top_article in top_articles()%}
+            <li><a href="#">{{ top_article.title }}</a></li>
+        {% endfor %}
     </ul>
     <h4>Categories</h4>
     <ul class="blog-categories">

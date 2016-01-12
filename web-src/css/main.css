@@ -556,7 +556,7 @@ a:hover {
 }
 .post-title h3 a {
   color: #535b60;
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
 .post-info {
   padding-top: 10px;
@@ -585,12 +585,13 @@ a:hover {
 }
 .post-content {
   margin: 30px 0 10px 0;
-  /*padding-bottom: 20px;*/
-}
-.post-content p {
   color: #828282;
   font-size: 0.9em;
   text-align: justify;
+  /*padding-bottom: 20px;*/
+}
+.post-content p {
+
 }
 .post-more {
   margin-top: 10px;

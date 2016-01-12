@@ -15,21 +15,39 @@ class ArticleRepository extends EntityRepository
 {
     public function findAllArticlesPaginated($first, $max)
     {
-        $dql = "SELECT art, aut, cat, tags
+        $dql = "SELECT art, aut, cat, tags, com
                 FROM AppBundle:Article art
                 JOIN art.author aut
                 JOIN art.category cat
                 JOIN art.tags tags
+                LEFT JOIN art.comments com
                 ORDER BY art.createdAt DESC";
+        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
 
-        return new Paginator($this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max));
+        return new Paginator($query);
     }
 
     public function findArticleBySlug($slug)
     {
+        $dql = "SELECT art, aut, cat, tags, com
+                FROM AppBundle:Article art
+                JOIN art.author aut
+                JOIN art.category cat
+                JOIN art.tags tags
+                LEFT JOIN art.comments com
+                WHERE art.slug = :slug";
+        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->getOneOrNullResult();
+
+        return $query;
+    }
+
+    public function findTopFiveArticlesByRating()
+    {
         $dql = "SELECT art
                 FROM AppBundle:Article art
-                WHERE art.slug = :slug";
-        return $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->getOneOrNullResult();
+                ORDER BY art.title";
+        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult(0)->setMaxResults(5)->getResult();
+
+        return $query;
     }
 }
