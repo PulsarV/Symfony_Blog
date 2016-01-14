@@ -1,0 +1,13 @@
+{% for article in articles %}
+    <div class="blog-post">
+        {% include '::article_header.html.twig' %}
+        <div class="post-content">
+            {{ article.content|slice(0, 800) }}
+        </div>
+        {% include '::article_footer.html.twig' %}
+        <div class="post-more">
+            <a href="{{ path('articleshow', {'slug': article.slug }) }}" class="btn btn-small">Read more</a>
+        </div>
+    </div>
+{% endfor %}
+{% include '::pagination.html.twig' %}

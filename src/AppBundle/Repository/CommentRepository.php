@@ -14,9 +14,9 @@ class CommentRepository extends EntityRepository
 {
     public function findRecentCommentsByDate()
     {
-        $dql = "SELECT com
-                FROM AppBundle:Comment com
-                ORDER BY com.createdAt DESC";
+        $dql = "SELECT co
+                FROM AppBundle:Comment co
+                ORDER BY co.createdAt DESC";
         $query = $this->getEntityManager()->createQuery($dql)->setFirstResult(0)->setMaxResults(5)->getResult();
 
         return $query;

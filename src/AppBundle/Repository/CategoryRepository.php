@@ -14,9 +14,9 @@ class CategoryRepository extends EntityRepository
 {
     public function findAllCategoriesASC()
     {
-        $dql = "SELECT cat
-                FROM AppBundle:Category cat
-                ORDER BY cat.name ASC";
+        $dql = "SELECT ca
+                FROM AppBundle:Category ca
+                ORDER BY ca.name ASC";
         $query = $this->getEntityManager()->createQuery($dql)->getResult();
 
         return $query;

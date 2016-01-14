@@ -15,13 +15,13 @@ class ArticleRepository extends EntityRepository
 {
     public function findAllArticlesPaginated($first, $max)
     {
-        $dql = "SELECT art, aut, cat, tags, com
-                FROM AppBundle:Article art
-                JOIN art.author aut
-                JOIN art.category cat
-                JOIN art.tags tags
-                LEFT JOIN art.comments com
-                ORDER BY art.createdAt DESC";
+        $dql = "SELECT ar
+                FROM AppBundle:Article ar
+                JOIN ar.author au
+                JOIN ar.category ca
+                JOIN ar.tags t
+                LEFT JOIN ar.comments co
+                ORDER BY ar.createdAt DESC";
         $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
 
         return new Paginator($query);
@@ -29,13 +29,13 @@ class ArticleRepository extends EntityRepository
 
     public function findArticleBySlug($slug)
     {
-        $dql = "SELECT art, aut, cat, tags, com
-                FROM AppBundle:Article art
-                JOIN art.author aut
-                JOIN art.category cat
-                JOIN art.tags tags
-                LEFT JOIN art.comments com
-                WHERE art.slug = :slug";
+        $dql = "SELECT ar, au, ca, t, co
+                FROM AppBundle:Article ar
+                JOIN ar.author au
+                JOIN ar.category ca
+                JOIN ar.tags t
+                LEFT JOIN ar.comments co
+                WHERE ar.slug = :slug";
         $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->getOneOrNullResult();
 
         return $query;
@@ -43,9 +43,9 @@ class ArticleRepository extends EntityRepository
 
     public function findTopArticlesByRating()
     {
-        $dql = "SELECT art
-                FROM AppBundle:Article art
-                ORDER BY art.ratingCounter / art.viewsCounter DESC";
+        $dql = "SELECT ar
+                FROM AppBundle:Article ar
+                ORDER BY ar.ratingCounter / ar.viewsCounter DESC";
         $query = $this->getEntityManager()->createQuery($dql)->setFirstResult(0)->setMaxResults(5)->getResult();
 
         return $query;

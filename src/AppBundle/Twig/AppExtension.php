@@ -53,7 +53,7 @@ class AppExtension extends \Twig_Extension
     {
         $tags = $this->em->getRepository('AppBundle:Tag')->findAll();
         shuffle($tags);
-
+        array_splice($tags, 50);
         return $tags;
     }
 }

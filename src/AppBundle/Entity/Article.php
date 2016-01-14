@@ -251,7 +251,11 @@ class Article
      */
     public function getRating()
     {
-        return $this->ratingCounter / $this->viewsCounter;
+        if (!$this->ratingCounter) {
+            return 0;
+        } else {
+            return $this->ratingCounter / $this->viewsCounter;
+        }
     }
 
     /**
