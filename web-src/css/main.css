@@ -671,18 +671,48 @@ a:hover {
   margin-left: 0;
   padding: 0;
 }
-.blog-sidebar .recent-posts li,
-.blog-sidebar .blog-categories li {
-  padding: 5px 20px 5px 0;
+.blog-sidebar .link-unit li {
+  padding: 5px 5px 5px 0;
   border-top: 1px solid #D5D5D5;
 }
-.blog-sidebar .recent-posts li:last-child,
-.blog-sidebar .blog-categories li:last-child {
+.blog-sidebar .link-unit li:last-child {
   border-bottom: 1px solid #D5D5D5;
 }
-.blog-sidebar .recent-posts a,
-.blog-sidebar .blog-categories a {
+.blog-sidebar .link-unit a {
   color: #535b60;
+}
+.tag-cloud {
+  text-align: center;
+}
+.tag-cloud-size-0 {
+  font-size: 0.6em;
+}
+.tag-cloud-size-1 {
+  font-size: 0.7em;
+}
+.tag-cloud-size-2 {
+  font-size: 0.8em;
+}
+.tag-cloud-size-3 {
+  font-size: 0.9em;
+}
+.tag-cloud-size-4 {
+  font-size: 1.0em;
+}
+.tag-cloud-size-5 {
+  font-size: 1.1em;
+}
+.tag-cloud-size-6 {
+  font-size: 1.2em;
+}
+.tag-cloud-size-7 {
+  font-size: 1.3em;
+}
+.tag-cloud-size-8 {
+  font-size: 1.4em;
+}
+.tag-cloud-size-9 {
+  font-size: 1.5em;
 }
 /*--------------------------------------------------------------------------
 +	E-commerce Style

@@ -1,5 +1,5 @@
 AppBundle\Entity\Author:
-  author{0..5}:
+  author{0..25}:
     firstname: <firstName()>
     lastname: <lastName()>
     birthday: <(new \DateTime($fake('date')))>
@@ -8,16 +8,16 @@ AppBundle\Entity\Author:
     email(unique): <email()>
 
 AppBundle\Entity\Commentator:
-  commentator{0..30}:
+  commentator{0..100}:
     name: <firstName()> <lastName()>
     email(unique): <email()>
 
 AppBundle\Entity\Category:
-  category{0..12}:
+  category{0..28}:
     name(unique): <sentence()>
 
 AppBundle\Entity\Article:
-  article{0..20}:
+  article{0..200}:
     title: <sentence()>
     titleImage: <text(25)>.png
     content: <text(10000)>
@@ -27,12 +27,12 @@ AppBundle\Entity\Article:
     category: @category*
 
 AppBundle\Entity\Tag:
-  tag{0..50}:
+  tag{0..80}:
     name(unique): <word()>
     articles: <numberBetween(1, 10)>x @article*
 
 AppBundle\Entity\Comment:
-  comment{0..50}:
+  comment{0..500}:
     message: <text(300)>
     commentator: @commentator*
     article: @article*

@@ -10,24 +10,31 @@
         </div>
     </form>
     <h4>Top articles</h4>
-    <ul class="recent-posts">
-        {% for top_article in top_articles()%}
-            <li><a href="#">{{ top_article.title }}</a></li>
+    <ul class="link-unit">
+        {% for top_article in top_articles() %}
+            <li><a href="{{ path('articleshow', {'slug': top_article.slug}) }}">{{ top_article.title }}</a></li>
         {% endfor %}
     </ul>
-    <h4>Categories</h4>
-    <ul class="blog-categories">
-        <li><a href="#">Lorem ipsum</a></li>
-        <li><a href="#">Sed sit amet metus</a></li>
-        <li><a href="#">Nunc et diam </a></li>
-        <li><a href="#">Quisque</a></li>
+    <h4>Recent comments</h4>
+    <ul class="link-unit">
+        {% for recent_comment in recent_comments() %}
+            <li><a href="{{ path('articleshow', {'slug': recent_comment.article.slug}) }}">{{ recent_comment.message|slice(0, 78) }} ...</a></li>
+        {% endfor %}
     </ul>
-    <h4>Archive</h4>
-    <ul>
-        <li><a href="#">January 2013</a></li>
-        <li><a href="#">February 2013</a></li>
-        <li><a href="#">March 2013</a></li>
-        <li><a href="#">April 2013</a></li>
-        <li><a href="#">May 2013</a></li>
+    <h4>Tag cloud</h4>
+    <ul class="link-unit">
+        <li class="tag-cloud">
+            {% for tag_cloud_element in tag_cloud_elements() %}
+                <a class="tag-cloud-size-{{ random(9) }}" href="">{{ tag_cloud_element.name }}&nbsp;</a>
+            {% endfor %}
+        </li>
     </ul>
+    {#<h4>Archive</h4>#}
+    {#<ul>#}
+        {#<li><a href="#">January 2013</a></li>#}
+        {#<li><a href="#">February 2013</a></li>#}
+        {#<li><a href="#">March 2013</a></li>#}
+        {#<li><a href="#">April 2013</a></li>#}
+        {#<li><a href="#">May 2013</a></li>#}
+    {#</ul>#}
 {% endblock %}

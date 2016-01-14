@@ -37,18 +37,23 @@ class AppExtension extends \Twig_Extension
 
     public function getTopArticles()
     {
-        $articles = $this->em->getRepository('AppBundle:Article')->findTopFiveArticlesByRating();
+        $articles = $this->em->getRepository('AppBundle:Article')->findTopArticlesByRating();
 
         return $articles;
     }
 
     public function getRecentComments()
     {
+        $comments = $this->em->getRepository('AppBundle:Comment')->findRecentCommentsByDate();
 
+        return $comments;
     }
 
     public function getTagCloudElements()
     {
+        $tags = $this->em->getRepository('AppBundle:Tag')->findAll();
+        shuffle($tags);
 
+        return $tags;
     }
 }

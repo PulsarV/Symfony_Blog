@@ -41,11 +41,11 @@ class ArticleRepository extends EntityRepository
         return $query;
     }
 
-    public function findTopFiveArticlesByRating()
+    public function findTopArticlesByRating()
     {
         $dql = "SELECT art
                 FROM AppBundle:Article art
-                ORDER BY art.title";
+                ORDER BY art.ratingCounter / art.viewsCounter DESC";
         $query = $this->getEntityManager()->createQuery($dql)->setFirstResult(0)->setMaxResults(5)->getResult();
 
         return $query;
