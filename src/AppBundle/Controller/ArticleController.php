@@ -30,9 +30,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/category/{slug}/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebycategoryindex")
+     * @Route("/articles/{page}/category/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebycategoryindex")
      * @Method({"GET"})
-     * @Template()
+     * @Template("@App/Article/index.html.twig")
      */
     public function indexByCategoryAction($slug, $page)
     {
@@ -48,7 +48,43 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/articles/show/{slug}", name="articleshow")
+     * @Route("/articles/{page}/author/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebyauthorindex")
+     * @Method({"GET"})
+     * @Template("@App/Article/index.html.twig")
+     */
+    public function indexByAuthorAction($slug, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')->findAllArticlesByAuthorPaginated($slug, ($page - 1) * $this->articlesPerPage, $this->articlesPerPage);
+
+        return [
+            'articles' => $articles,
+            'page' => $page,
+            'slug' => $slug,
+            'pagesCount' => ceil(count($articles) / $this->articlesPerPage),
+        ];
+    }
+
+    /**
+     * @Route("/articles/{page}/tag/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebytagindex")
+     * @Method({"GET"})
+     * @Template("@App/Article/index.html.twig")
+     */
+    public function indexByTagAction($slug, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')->findAllArticlesByTagPaginated($slug, ($page - 1) * $this->articlesPerPage, $this->articlesPerPage);
+
+        return [
+            'articles' => $articles,
+            'page' => $page,
+            'slug' => $slug,
+            'pagesCount' => ceil(count($articles) / $this->articlesPerPage),
+        ];
+    }
+
+    /**
+     * @Route("/articles/{slug}/show", name="articleshow")
      * @Method({"GET"})
      * @Template()
      */

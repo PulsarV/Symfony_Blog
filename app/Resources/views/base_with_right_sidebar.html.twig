@@ -25,7 +25,7 @@
     <ul class="link-unit">
         <li class="tag-cloud">
             {% for tag_cloud_element in tag_cloud_elements() %}
-                <a class="tag-cloud-size-{{ random(9) }}" href="">{{ tag_cloud_element.name }}&nbsp;</a>
+                <a class="tag-cloud-size-{{ random(9) }}" href="{{ path('articlebytagindex', { 'slug': tag_cloud_element.slug }) }}">{{ tag_cloud_element.name }}&nbsp;</a>
             {% endfor %}
         </li>
     </ul>
