@@ -27,6 +27,21 @@ class ArticleRepository extends EntityRepository
         return new Paginator($query);
     }
 
+    public function findAllArticlesByCategoryPaginated($slug, $first, $max)
+    {
+        $dql = "SELECT ar
+                FROM AppBundle:Article ar
+                JOIN ar.author au
+                JOIN ar.category ca
+                JOIN ar.tags t
+                LEFT JOIN ar.comments co
+                WHERE ca.slug = :slug
+                ORDER BY ar.createdAt DESC";
+        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->setFirstResult($first)->setMaxResults($max);
+        
+        return new Paginator($query);
+    }
+
     public function findArticleBySlug($slug)
     {
         $dql = "SELECT ar, au, ca, t, co

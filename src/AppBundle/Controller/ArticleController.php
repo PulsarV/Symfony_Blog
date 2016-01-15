@@ -30,6 +30,24 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/category/{slug}/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebycategoryindex")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function indexByCategoryAction($slug, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')->findAllArticlesByCategoryPaginated($slug, ($page - 1) * $this->articlesPerPage, $this->articlesPerPage);
+
+        return [
+            'articles' => $articles,
+            'page' => $page,
+            'slug' => $slug,
+            'pagesCount' => ceil(count($articles) / $this->articlesPerPage),
+        ];
+    }
+
+    /**
      * @Route("/articles/show/{slug}", name="articleshow")
      * @Method({"GET"})
      * @Template()
