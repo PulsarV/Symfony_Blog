@@ -728,6 +728,7 @@ label input {
 }
 label.star-radio input+div {
   font-size: 1.7em;
+  text-shadow: 0 1px #fff,0 0 8px #c8cfe6;
 }
 .star-is-checked {
   color: goldenrod;
@@ -2532,6 +2533,7 @@ span.color-red {
 }
 .menuextras ul {
   margin: 0;
+  margin-top: 10px;
   padding: 0;
   list-style-type: none;
   float: right;
@@ -2569,6 +2571,14 @@ span.color-red {
 .menuextras .choose-country .dropdown-menu li a:hover {
   color: #fff;
   background-color: #333 !important;
+}
+.menu-img {
+  margin-bottom: 0;
+  margin-top: -5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
 }
 /*--------------------------------------------------------------------------
 +	Buttons Style

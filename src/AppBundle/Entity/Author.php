@@ -79,7 +79,7 @@ class Author
     private $articles;
 
     /**
-     * @Gedmo\Slug(fields={"firstname", "lastname"})
+     * @Gedmo\Slug(fields={"nickname"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
