@@ -3,6 +3,6 @@
     <br>
     <i class="glyphicon glyphicon-tags"></i>
     {% for tag in article.tags %}
-        <a href="{{ path('articlebytagindex', { 'slug': tag.slug }) }}" title="Show posts filtered by this tag">{{ tag.name }}</a>&nbsp;
+        <a href="{{ path('articlebytagindex', { 'slug': tag.slug }) }}" title="Show posts filtered by this tag">{{ tag.name }}{% if not loop.last %},{% endif %}</a>
     {% endfor %}
 </div>

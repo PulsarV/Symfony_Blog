@@ -590,9 +590,6 @@ a:hover {
   text-align: justify;
   /*padding-bottom: 20px;*/
 }
-.post-content p {
-
-}
 .post-more {
   margin-top: 10px;
   text-align: right;
@@ -620,24 +617,26 @@ a:hover {
   -moz-background-clip: padding;
   border-radius: 3px;
   background-clip: padding-box;
+  font-size: 0.9em;
+  text-align: justify;
 }
 .comment-author {
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: 600;
   margin-bottom: 10px;
 }
 .comment-author img {
-  max-width: 50px;
-  -webkit-border-radius: 25px;
+  max-width: 40px;
+  -webkit-border-radius: 20px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 25px;
+  -moz-border-radius: 20px;
   -moz-background-clip: padding;
-  border-radius: 25px;
+  border-radius: 20px;
   background-clip: padding-box;
   margin-right: 10px;
 }
 .comment-date {
-  font-size: 0.9em;
+  font-size: 0.8em;
   margin-right: 20px;
 }
 .comment-actions {
@@ -713,6 +712,25 @@ a:hover {
 }
 .tag-cloud-size-9 {
   font-size: 1.5em;
+}
+.set-rating-block {
+  padding: 10px 5px 5px 0;
+  border-bottom: 2px dotted #CCC;
+  color: #535b60;
+}
+.rating-submit {
+  margin-top: -15px;
+  margin-bottom: 5px;
+  text-align: right;
+}
+label input {
+  display: none;
+}
+label.star-radio input+div {
+  font-size: 1.7em;
+}
+.star-is-checked {
+  color: goldenrod;
 }
 /*--------------------------------------------------------------------------
 +	E-commerce Style

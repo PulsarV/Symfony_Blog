@@ -7,5 +7,65 @@
             {{ article.content }}
         </div>
         {% include '::article_footer.html.twig' %}
+        <h4>Put estimate for this article</h4>
+        <div class="set-rating-block">
+            <form class=""  onclick="">
+                <div class="form-group text-center">
+                    <label class="star-radio" for="r1"><input type="radio" name="rating" value="1" id="r1" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
+                    <label class="star-radio" for="r2"><input type="radio" name="rating" value="2" id="r2" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
+                    <label class="star-radio" for="r3"><input type="radio" name="rating" value="3" id="r3" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
+                    <label class="star-radio" for="r4"><input type="radio" name="rating" value="4" id="r4" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
+                    <label class="star-radio" for="r5"><input type="radio" name="rating" value="5" id="r5" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
+                </div>
+                <div class="rating-submit">
+                    <button type="submit" class="btn btn-small">Estimate</button>
+                </div>
+            </form>
+        </div>
+        <!-- Comments -->
+        <a id="comments"></a>
+        <div class="post-coments">
+            <h4>Comments ({{ article.comments|length }})</h4>
+            <ul class="post-comments">
+                {% for comment in article.comments %}
+                    <li>
+                        <div class="comment-wrapper">
+                            <div class="comment-author"><img src="{{ asset('images/user1.jpg') }}" alt="{{ comment.commentator.name }}"> {{ comment.commentator.name }}</div>
+                            <p>
+                                {{ comment.message }}
+                            </p>
+                            <!-- Comment Controls -->
+                            <div class="comment-actions">
+                                <span class="comment-date">{{ comment.createdAt|date("d M, Y") }}</span>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <!-- Comments Form -->
+            <h4>Leave a Comment</h4>
+            <div class="comment-form-wrapper">
+                <form class="">
+                    <div class="form-group">
+                        <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
+                        <input class="form-control" id="comment-name" type="text" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-email"><i class="glyphicon glyphicon-envelope"></i> <b>Your Email</b></label>
+                        <input class="form-control" id="comment-email" type="text" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Your Message</b></label>
+                        <textarea class="form-control" rows="5" id="comment-message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-large pull-right">Send</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <!-- End Comment Form -->
+        </div>
+        <!-- End Comments -->
     </div>
 {% endblock %}
