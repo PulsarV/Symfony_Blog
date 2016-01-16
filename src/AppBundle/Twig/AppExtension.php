@@ -31,8 +31,19 @@ class AppExtension extends \Twig_Extension
     public function getAllCategories()
     {
         $categories = $this->em->getRepository('AppBundle:Category')->findAllCategoriesASC();
+        $preformattedCategories = [[],[]];
+        for ($i = 0; $i < count($categories); $i++) {
+            if ($i < count($categories) / 3) {
+                $preformattedCategories[0][] = $categories[$i];
+            } else if ($i < count($categories) / 3 * 2) {
+                $preformattedCategories[1][] = $categories[$i];
+            } else {
+                $preformattedCategories[2][] = $categories[$i];
+            }
 
-        return $categories;
+        }
+
+        return $preformattedCategories;
     }
 
     public function getTopArticles()

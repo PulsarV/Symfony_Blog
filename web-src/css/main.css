@@ -2417,8 +2417,8 @@ span.color-red {
 }
 .mainmenu > ul > li.active > a,
 .mainmenu .mainmenu-submenu-inner > li.active > a {
-  color: #4f8db3;
-  font-weight: 600 !important;
+  color: #999;
+  /*font-weight: 600 !important;*/
 }
 .mainmenu > ul > li.mainmenu-open a,
 .mainmenu .mainmenu-submenu-inner > li.mainmenu-open a,
@@ -2461,7 +2461,7 @@ span.color-red {
 }
 .mainmenu-open .mainmenu-submenu {
   display: block;
-  padding-bottom: 3em;
+  /*padding-bottom: 3em;*/
 }
 .mainmenu-submenu h4 {
   color: #bad2e1;
@@ -2471,6 +2471,7 @@ span.color-red {
   font-weight: 300;
 }
 .mainmenu-submenu ul {
+  padding: 1em 0 0.6em;
   margin-left: 20px;
 }
 @media screen and (max-width: 979px) {
