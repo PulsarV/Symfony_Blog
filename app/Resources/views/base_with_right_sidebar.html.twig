@@ -1,32 +1,43 @@
 {% extends '::base.html.twig' %}
-{% block sidebar %}
-    <h4>Search our Blog</h4>
-    <form>
-        <div class="input-group">
-            <input class="form-control input-md" id="appendedInputButtons" type="text">
-            <span class="input-group-btn">
-                <button class="btn btn-md" type="button">Search</button>
-            </span>
-        </div>
-    </form>
-    <h4>Top articles</h4>
-    <ul class="link-unit">
-        {% for top_article in top_articles() %}
-            <li><a href="{{ path('articleshow', {'slug': top_article.slug}) }}">{{ top_article.title }}</a></li>
-        {% endfor %}
-    </ul>
-    <h4>Recent comments</h4>
-    <ul class="link-unit">
-        {% for recent_comment in recent_comments() %}
-            <li><a href="{{ path('articleshow', {'slug': recent_comment.article.slug}) }}#comments">{{ recent_comment.message|slice(0, 78) }} ...</a></li>
-        {% endfor %}
-    </ul>
-    <h4>Tag cloud</h4>
-    <ul class="link-unit">
-        <li class="tag-cloud">
-            {% for tag_cloud_element in tag_cloud_elements() %}
-                <a class="tag-cloud-size-{{ random(9) }}" href="{{ path('articlebytagindex', { 'slug': tag_cloud_element.slug }) }}">{{ tag_cloud_element.name }}&nbsp;</a>
+{% block page %}
+    <!-- Blog Post -->
+    <div class="col-sm-8">
+        {% block content %}
+            <h1>Page content</h1>
+        {% endblock %}
+    </div>
+    <!-- End Blog Post -->
+    <!-- Sidebar -->
+    <div class="col-sm-4 blog-sidebar">
+        <h4>Search our Blog</h4>
+        <form>
+            <div class="input-group">
+                <input class="form-control input-md" id="appendedInputButtons" type="text">
+                <span class="input-group-btn">
+                    <button class="btn btn-md" type="button">Search</button>
+                </span>
+            </div>
+        </form>
+        <h4>Top articles</h4>
+        <ul class="link-unit">
+            {% for top_article in top_articles() %}
+                <li><a href="{{ path('articleshow', {'slug': top_article.slug}) }}">{{ top_article.title }}</a></li>
             {% endfor %}
-        </li>
-    </ul>
+        </ul>
+        <h4>Recent comments</h4>
+        <ul class="link-unit">
+            {% for recent_comment in recent_comments() %}
+                <li><a href="{{ path('articleshow', {'slug': recent_comment.article.slug}) }}#comments">{{ recent_comment.message|slice(0, 78) }} ...</a></li>
+            {% endfor %}
+        </ul>
+        <h4>Tag cloud</h4>
+        <ul class="link-unit">
+            <li class="tag-cloud">
+                {% for tag_cloud_element in tag_cloud_elements() %}
+                    <a class="tag-cloud-size-{{ random(9) }}" href="{{ path('articlebytagindex', { 'slug': tag_cloud_element.slug }) }}">{{ tag_cloud_element.name }}&nbsp;</a>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+    <!-- End Sidebar -->
 {% endblock %}

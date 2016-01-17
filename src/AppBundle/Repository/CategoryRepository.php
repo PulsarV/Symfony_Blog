@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * CategoryRepository
@@ -12,6 +13,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    public function findAllCategoriesPaginated($first, $max)
+    {
+        $dql = "SELECT ca
+                FROM AppBundle:Category ca
+                LEFT JOIN ca.articles ar
+                ORDER BY ca.createdAt DESC";
+        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+
+        return new Paginator($query);
+    }
+
     public function findAllCategoriesASC()
     {
         $dql = "SELECT ca

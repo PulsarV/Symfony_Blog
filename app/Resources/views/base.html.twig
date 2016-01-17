@@ -43,7 +43,7 @@
                                     </div>
                                 </li>
                                 <li><a href="#">Login</a></li>
-                                <li class="menu-img"><a href="#"><img src="{{ asset('images/gear.png') }}"></img></a></li>
+                                <li class="menu-img"><a href="{{ path('adminindexpage') }}"><i class="glyphicon glyphicon-cog"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -87,20 +87,9 @@
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        <!-- Blog Post -->
-                        <div class="col-sm-8">
-                            {% block content %}
-                                <h1>Page content</h1>
-                            {% endblock %}
-                        </div>
-                        <!-- End Blog Post -->
-                        <!-- Sidebar -->
-                        <div class="col-sm-4 blog-sidebar">
-                            {% block sidebar %}
-                                <h1>Sidebar content</h1>
-                            {% endblock %}
-                        </div>
-                        <!-- End Sidebar -->
+                        {% block page %}
+                            <h1>Page content</h1>
+                        {% endblock %}
                     </div>
                 </div>
             </div>

@@ -1,0 +1,31 @@
+{% extends '::base_with_left_sidebar.html.twig' %}
+{% block content %}
+    <div class="blog-post">
+        <table class="table table-responsive table-striped table-hover table-bordered">
+            <caption>
+                <div class="post-title">
+                    <h3>Author list</a></h3>
+                </div>
+            </caption>
+            <tr class="text-center">
+                <th class="column col-sm-1 text-center" colspan="2"><a href="#"><i class="glyphicon glyphicon-plus"></a></th>
+                <th class="column col-sm-3 text-center">Author</th>
+                <th class="column col-sm-2 text-center">Nickname</th>
+                <th class="column col-sm-1 text-center">Created</th>
+                <th class="column col-sm-1 text-center">Updated</th>
+
+            </tr>
+            {% for author in authors %}
+                <tr>
+                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-list-alt"></a></td>
+                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></a></td>
+                    <td>{{ author.firstName }}&nbsp;{{ author.lastName }}</td>
+                    <td>{{ author.nickname }}</td>
+                    <td>{{ author.createdAt|date("d M, Y") }}</td>
+                    <td>{{ author.updatedAt|date("d M, Y") }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% include '::pagination.html.twig' %}
+{% endblock %}

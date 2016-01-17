@@ -2573,12 +2573,10 @@ span.color-red {
   background-color: #333 !important;
 }
 .menu-img {
-  margin-bottom: 0;
-  margin-top: -5px;
   padding-top: 0;
   padding-bottom: 0;
+  font-size: 1.7em;
   text-align: center;
-  vertical-align: middle;
 }
 /*--------------------------------------------------------------------------
 +	Buttons Style
@@ -2685,3 +2683,4 @@ span.color-red {
 .dropdown.open a.dropdown-toggle .caret {
   border-top: 4px solid #FFF;
 }
+/*Tables style*/
