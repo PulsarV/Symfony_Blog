@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 //todo: add comment reply
 
@@ -35,16 +36,21 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="message", type="text")
+     * @Assert\NotBlank(
+     *     message = "Comment message cannot be empty"
+     * )
      */
     private $message;
 
     /**
      * @ORM\ManyToOne(targetEntity="Commentator", inversedBy="comments")
+     * @Assert\Valid()
      */
     private $commentator;
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
+     * @Assert\Valid()
      */
     private $article;
 

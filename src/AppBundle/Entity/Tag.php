@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tag
@@ -35,12 +36,19 @@ class Tag
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=64, unique=true)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 64,
+     *     minMessage = "Tag name must be at least {{ limit }} characters long",
+     *     maxMessage = "Tag name  cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
      * @ORM\JoinTable(name="tags_articles")
+     * @Assert\Valid()
      */
     private $articles;
 

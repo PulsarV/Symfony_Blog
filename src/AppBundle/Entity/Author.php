@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Author
@@ -35,6 +36,12 @@ class Author
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=64)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 64,
+     *     minMessage = "Firstname must be at least {{ limit }} characters long",
+     *     maxMessage = "Firstname cannot be longer than {{ limit }} characters"
+     * )
      */
     private $firstname;
 
@@ -42,6 +49,12 @@ class Author
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=64)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 64,
+     *     minMessage = "Lastname must be at least {{ limit }} characters long",
+     *     maxMessage = "Lastname cannot be longer than {{ limit }} characters"
+     * )
      */
     private $lastname;
 
@@ -56,13 +69,25 @@ class Author
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255)
+     * @Assert\Length(
+     *     min = 10,
+     *     max = 255,
+     *     minMessage = "Address must be at least {{ limit }} characters long",
+     *     maxMessage = "Address cannot be longer than {{ limit }} characters"
+     * )
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=60, unique=true)
+     * @ORM\Column(name="nickname", type="string", length=32, unique=true)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 32,
+     *     minMessage = "Nickname must be at least {{ limit }} characters long",
+     *     maxMessage = "Nickname cannot be longer than {{ limit }} characters"
+     * )
      */
     private $nickname;
 
@@ -70,11 +95,16 @@ class Author
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=129, unique=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     * @Assert\Valid()
      */
     private $articles;
 

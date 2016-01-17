@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
@@ -35,13 +36,25 @@ class Article
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 50,
+     *     minMessage = "Article title must be at least {{ limit }} characters long",
+     *     maxMessage = "Article title cannot be longer than {{ limit }} characters"
+     * )
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title_image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="title_image", type="string", length=255)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 50,
+     *     minMessage = "File name must be at least {{ limit }} characters long",
+     *     maxMessage = "File name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $titleImage;
 
@@ -49,6 +62,9 @@ class Article
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank(
+     *     message = "Article text cannot be empty"
+     * )
      */
     private $content;
 
@@ -68,21 +84,25 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
+     * @Assert\Valid()
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
+     * @Assert\Valid()
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", mappedBy="articles")
+     * @Assert\Valid()
      */
     private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     * @Assert\Valid()
      */
     private $comments;
 
@@ -235,6 +255,10 @@ class Article
      * @param integer $rating
      *
      * @return Article
+     * @Assert\Range(
+     *     min="1",
+     *     max="5"
+     * )
      */
     public function setRating($rating)
     {

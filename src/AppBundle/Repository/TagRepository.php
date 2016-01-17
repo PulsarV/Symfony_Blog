@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * TagRepository
@@ -12,4 +13,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+    public function findAllTagsPaginated($first, $max)
+    {
+        $dql = "SELECT t
+                FROM AppBundle:Tag t
+                LEFT JOIN t.articles ar
+                ORDER BY t.createdAt DESC";
+        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+
+        return new Paginator($query);
+    }
+
 }

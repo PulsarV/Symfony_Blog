@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commentator
@@ -35,6 +36,12 @@ class Commentator
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=129)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 129,
+     *     minMessage = "Commentator name must be at least {{ limit }} characters long",
+     *     maxMessage = "Commentator name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
@@ -42,11 +49,16 @@ class Commentator
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=129)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="commentator")
+     * @Assert\Valid()
      */
     private $comments;
 

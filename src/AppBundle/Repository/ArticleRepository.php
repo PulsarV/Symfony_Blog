@@ -19,7 +19,7 @@ class ArticleRepository extends EntityRepository
                 FROM AppBundle:Article ar
                 JOIN ar.author au
                 JOIN ar.category ca
-                JOIN ar.tags t
+                LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 ORDER BY ar.createdAt DESC";
         $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);

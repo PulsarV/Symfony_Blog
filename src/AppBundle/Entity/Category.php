@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -35,11 +36,18 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 255,
+     *     minMessage = "Category name must be at least {{ limit }} characters long",
+     *     maxMessage = "Category name  cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
+     * @Assert\Valid()
      */
     private $articles;
 
