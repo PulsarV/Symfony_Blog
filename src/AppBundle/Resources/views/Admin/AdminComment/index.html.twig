@@ -4,11 +4,11 @@
         <table class="table table-responsive table-striped table-hover table-bordered">
             <caption>
                 <div class="post-title">
-                    <h3>Author list</a></h3>
+                    <h3>Author list</h3>
                 </div>
             </caption>
             <tr class="text-center">
-                <th class="column col-sm-1 text-center" colspan="2"><a href="#"><i class="glyphicon glyphicon-plus"></a></th>
+                <th class="column col-sm-1 text-center" colspan="2"><a href="#"><i class="glyphicon glyphicon-plus"></i></a></th>
                 <th class="column col-sm-3 text-center">Comment</th>
                 <th class="column col-sm-2 text-center">Commentator</th>
                 <th class="column col-sm-1 text-center">Created</th>
@@ -17,8 +17,8 @@
             </tr>
             {% for comment in comments %}
                 <tr>
-                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-list-alt"></a></td>
-                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></a></td>
+                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-list-alt"></i></a></td>
+                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
                     <td>{{ comment.message }}</td>
                     <td>{{ comment.commentator.name }}</td>
                     <td>{{ comment.createdAt|date("d M, Y") }}</td>

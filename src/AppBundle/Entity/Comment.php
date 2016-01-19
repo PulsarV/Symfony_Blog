@@ -43,13 +43,13 @@ class Comment
     private $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commentator", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Commentator", inversedBy="comments", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     private $commentator;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     private $article;
@@ -126,7 +126,7 @@ class Comment
      *
      * @return Comment
      */
-    public function setArticle(Article $article = null)
+    public function setArticle(Article $article)
     {
         $this->article = $article;
 

@@ -2,10 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Commentator;
+use AppBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends Controller
 {
@@ -13,7 +16,7 @@ class ArticleController extends Controller
     protected $articlesPerPage = 5;
 
     /**
-     * @Route("/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articleindex")
+     * @Route("/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="article_index")
      * @Method({"GET"})
      * @Template()
      */
@@ -30,7 +33,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/articles/{page}/category/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebycategoryindex")
+     * @Route("/articles/{page}/category/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="article_bycategory_index")
      * @Method({"GET"})
      * @Template("@App/Article/index.html.twig")
      */
@@ -48,7 +51,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/articles/{page}/author/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebyauthorindex")
+     * @Route("/articles/{page}/author/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="article_byauthor_index")
      * @Method({"GET"})
      * @Template("@App/Article/index.html.twig")
      */
@@ -66,7 +69,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/articles/{page}/tag/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="articlebytagindex")
+     * @Route("/articles/{page}/tag/{slug}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="article_bytag_index")
      * @Method({"GET"})
      * @Template("@App/Article/index.html.twig")
      */
@@ -84,15 +87,33 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/articles/{slug}/show", name="articleshow")
-     * @Method({"GET"})
+     * @Route("/articles/{slug}/show", name="article_show")
+     * @Method({"GET", "POST"})
      * @Template()
      */
-    public function showAction($slug)
+    public function showAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('AppBundle:Article')->findArticleBySlug($slug);
 
-        return ['article' => $article];
+        $comment = new Comment();
+        //$commentator = new Commentator();
+        //$comment->setArticle($article);
+        //$comment->setCommentator($commentator);
+        $commentForm = $this->createForm('AppBundle\Form\CommentType', $comment);
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+//            $em->persist($comment);
+//            $em->flush();
+
+            return $this->redirectToRoute('article_show', ['slug' => $slug]);
+        }
+
+        return [
+            'article' => $article,
+            'commentForm' => $commentForm->createView(),
+        ];
     }
 }

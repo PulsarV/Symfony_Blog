@@ -1,0 +1,16 @@
+{% extends '::base_with_left_sidebar.html.twig' %}
+{% form_theme editForm 'bootstrap_3_layout.html.twig' %}
+{% form_theme deleteForm 'bootstrap_3_layout.html.twig' %}
+{% block content %}
+    <div class="blog-post">
+        <h4>Edit category</h4>
+        <div>
+            {{ form_start(editForm) }}
+                {{ form_errors(editForm) }}
+                {{ form_row(editForm.name) }}
+            <button type="submit" class="btn btn-large pull-right">Save</button>
+            <div class="clearfix"></div>
+            {{ form_end(editForm) }}
+        </div>
+    </div>
+{% endblock %}

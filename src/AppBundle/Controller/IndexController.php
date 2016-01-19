@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class IndexController extends Controller
 {
     /**
-     * @Route("/", name="indexpage")
+     * @Route("/", name="index_page")
      */
     public function indexAction()
     {
-        return $this->redirectToRoute('articleindex');
+        return $this->redirectToRoute('article_index');
     }
 }

@@ -1,0 +1,17 @@
+{% extends '::base_with_left_sidebar.html.twig' %}
+{% form_theme newForm 'bootstrap_3_layout.html.twig' %}
+{% block content %}
+    <div class="blog-post">
+        <h4>Add new category</h4>
+        <div>
+            {{ form_start(newForm) }}
+            {{ form_errors(newForm) }}
+            {{ form_row(newForm.name) }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-large pull-right">Save</button>
+            </div>
+            <div class="clearfix"></div>
+            {{ form_end(newForm) }}
+        </div>
+    </div>
+{% endblock %}

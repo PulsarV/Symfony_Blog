@@ -1,8 +1,8 @@
 <div class="post-info bottom-info-block">
-    <i class="glyphicon glyphicon-folder-open"></i> <a href="{{ path('articlebycategoryindex', { 'slug': article.category.slug }) }}" title="Show all posts in this category">{{ article.category.name }}</a>
+    <i class="glyphicon glyphicon-folder-open"></i> <a href="{{ path('article_bycategory_index', { 'slug': article.category.slug }) }}" title="Show all posts in this category">{{ article.category.name }}</a>
     <br>
     <i class="glyphicon glyphicon-tags"></i>
     {% for tag in article.tags %}
-        <a href="{{ path('articlebytagindex', { 'slug': tag.slug }) }}" title="Show posts filtered by this tag">{{ tag.name }}{% if not loop.last %},{% endif %}</a>
+        <a href="{{ path('article_bytag_index', { 'slug': tag.slug }) }}" title="Show posts filtered by this tag">{{ tag.name }}{% if not loop.last %},{% endif %}</a>
     {% endfor %}
 </div>

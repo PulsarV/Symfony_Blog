@@ -1,0 +1,38 @@
+AppBundle\Entity\Author:
+  author{0..1}:
+    firstname: <firstName()>
+    lastname: <lastName()>
+    birthday: <(new \DateTime($fake('date')))>
+    address: <address()>
+    nickname(unique): <userName()>
+    email(unique): <email()>
+
+AppBundle\Entity\Commentator:
+  commentator{0..2}:
+    name: <firstName()> <lastName()>
+    email(unique): <email()>
+
+AppBundle\Entity\Category:
+  category{0..2}:
+    name(unique): <sentence()>
+
+AppBundle\Entity\Article:
+  article{0..4}:
+    title: <sentence()>
+    titleImage: <text(25)>.png
+    content: <text(10000)>
+    viewsCounter: <randomNumber(8)>
+    ratingCounter: <numberBetween(0, $viewsCounter * 5)>
+    author: @author*
+    category: @category*
+
+AppBundle\Entity\Tag:
+  tag{0..8}:
+    name(unique): <word()>
+    articles: <numberBetween(1, 10)>x @article*
+
+AppBundle\Entity\Comment:
+  comment{0..20}:
+    message: <text(300)>
+    commentator: @commentator*
+    article: @article*

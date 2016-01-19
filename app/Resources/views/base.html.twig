@@ -43,7 +43,7 @@
                                     </div>
                                 </li>
                                 <li><a href="#">Login</a></li>
-                                <li class="menu-img"><a href="{{ path('adminindexpage') }}"><i class="glyphicon glyphicon-cog"></i></a></li>
+                                <li class="menu-img"><a href="{{ path('admin_index_page') }}"><i class="glyphicon glyphicon-cog"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <ul>
                             <li class="logo-wrapper"><a href="http://www.geekhub.ck.ua"><img src="{{ asset('images/geekhub-logo.png') }}" alt="Geekhub symfony blog"></a></li>
                             <li>
-                                <a href="{{ path('indexpage') }}">Home</a>
+                                <a href="{{ path('index_page') }}">Home</a>
                             </li>
                             <li class="has-submenu active">
                                 <a href="">Categories</a>
@@ -62,7 +62,7 @@
                                             <div>
                                                 <ul>
                                                     {% for menu_category in menu_categories[col] %}
-                                                        <li><a href="{{ path('articlebycategoryindex', {'slug': menu_category.slug}) }}">{{ menu_category.name }}</a></li>
+                                                        <li><a href="{{ path('article_bycategory_index', {'slug': menu_category.slug}) }}">{{ menu_category.name }}</a></li>
                                                     {% endfor %}
                                                 </ul>
                                             </div>

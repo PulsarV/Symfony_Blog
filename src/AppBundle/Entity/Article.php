@@ -83,13 +83,13 @@ class Article
     private $viewsCounter;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     private $category;
@@ -255,10 +255,6 @@ class Article
      * @param integer $rating
      *
      * @return Article
-     * @Assert\Range(
-     *     min="1",
-     *     max="5"
-     * )
      */
     public function setRating($rating)
     {
@@ -289,7 +285,7 @@ class Article
      *
      * @return Article
      */
-    public function setAuthor(Author $author = null)
+    public function setAuthor(Author $author)
     {
         $this->author = $author;
 
@@ -313,7 +309,7 @@ class Article
      *
      * @return Article
      */
-    public function setCategory(Category $category = null)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 
@@ -339,7 +335,8 @@ class Article
      */
     public function addComment(Comment $comment)
     {
-        $this->comments[] = $comment;
+        $comment->setArticle($this);
+        $this->comments->add($comment);
 
         return $this;
     }

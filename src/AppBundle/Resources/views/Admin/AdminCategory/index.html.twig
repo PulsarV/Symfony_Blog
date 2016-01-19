@@ -4,11 +4,11 @@
         <table class="table table-responsive table-striped table-hover table-bordered">
             <caption>
                 <div class="post-title">
-                    <h3>Category list</a></h3>
+                    <h3>Category list</h3>
                 </div>
             </caption>
             <tr class="text-center">
-                <th class="column col-sm-1 text-center" colspan="2"><a href="#"><i class="glyphicon glyphicon-plus"></a></th>
+                <th class="column col-sm-1 text-center" colspan="2"><a href="{{ path('admin_category_new') }}"><i class="glyphicon glyphicon-plus"></i></a></th>
                 <th class="column col-sm-5 text-center">Category name</th>
                 <th class="column col-sm-1 text-center">Created</th>
                 <th class="column col-sm-1 text-center">Updated</th>
@@ -16,8 +16,8 @@
             </tr>
             {% for category in categories %}
                 <tr>
-                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-list-alt"></a></td>
-                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></a></td>
+                    <td class="text-center"><a href="{{ path('admin_category_edit', {'slug': category.slug}) }}"><i class="glyphicon glyphicon-list-alt"></i></a></td>
+                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></i></td>
                     <td>{{ category.name }}</td>
                     <td>{{ category.createdAt|date("d M, Y") }}</td>
                     <td>{{ category.updatedAt|date("d M, Y") }}</td>

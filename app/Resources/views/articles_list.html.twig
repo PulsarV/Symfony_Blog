@@ -6,7 +6,7 @@
         </div>
         {% include '::article_footer.html.twig' %}
         <div class="post-more">
-            <a href="{{ path('articleshow', {'slug': article.slug}) }}" class="btn btn-small">Read more</a>
+            <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn btn-small">Read more</a>
         </div>
     </div>
 {% endfor %}

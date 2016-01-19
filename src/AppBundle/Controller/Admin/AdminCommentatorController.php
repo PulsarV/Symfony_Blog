@@ -12,7 +12,7 @@ class AdminCommentatorController extends Controller
     protected $commentatorsPerPage = 25;
 
     /**
-     * @Route("/config/commentators/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admincommentatorindex")
+     * @Route("/config/commentators/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_commentator_index")
      * @Method({"GET"})
      * @Template()
      */

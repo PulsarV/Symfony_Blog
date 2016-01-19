@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AdminIndexController extends Controller
 {
     /**
-     * @Route("/config", name="adminindexpage")
+     * @Route("/config", name="admin_index_page")
      */
     public function indexAction()
     {
-        return $this->redirectToRoute('adminarticleindex');
+        return $this->redirectToRoute('admin_article_index');
     }
 }

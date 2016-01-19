@@ -1,4 +1,5 @@
 {% extends '::base_with_right_sidebar.html.twig' %}
+{% form_theme commentForm 'bootstrap_3_layout.html.twig' %}
 
 {% block content %}
     <div class="blog-post">
@@ -44,25 +45,17 @@
             </ul>
             <!-- Comments Form -->
             <h4>Leave a Comment</h4>
-            <div class="comment-form-wrapper">
-                <form class="">
-                    <div class="form-group">
-                        <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
-                        <input class="form-control" id="comment-name" type="text" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="comment-email"><i class="glyphicon glyphicon-envelope"></i> <b>Your Email</b></label>
-                        <input class="form-control" id="comment-email" type="text" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Your Message</b></label>
-                        <textarea class="form-control" rows="5" id="comment-message"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-large pull-right">Send</button>
-                    </div>
-                    <div class="clearfix"></div>
-                </form>
+            <div>
+                {{ form_start(commentForm) }}
+                {{ form_errors(commentForm) }}
+                {{ form_row(commentForm.commentator.name) }}
+                {{ form_row(commentForm.commentator.email) }}
+                {{ form_row(commentForm.message) }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-large pull-right">Send comment</button>
+                </div>
+                <div class="clearfix"></div>
+                {{ form_end(commentForm) }}
             </div>
             <!-- End Comment Form -->
         </div>

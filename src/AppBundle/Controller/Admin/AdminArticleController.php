@@ -12,7 +12,7 @@ class AdminArticleController extends Controller
     protected $articlesPerPage = 25;
 
     /**
-     * @Route("/config/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="adminarticleindex")
+     * @Route("/config/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_article_index")
      * @Method({"GET"})
      * @Template()
      */
