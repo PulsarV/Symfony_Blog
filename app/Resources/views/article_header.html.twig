@@ -8,5 +8,5 @@
     <a href="{{ path('article_show', {'slug': article.slug }) }}#comments" title="Show comments"><i class="glyphicon glyphicon-comment"></i>{{ article.comments|length }}</a>
 </div>
 <div class="post-image">
-    <img src="{{ asset('images/blog-large.jpg') }}" alt="Post Title">
+    <img src="{{ asset("uploads/#{article.titleImage}") }}" alt="Post title image">
 </div>

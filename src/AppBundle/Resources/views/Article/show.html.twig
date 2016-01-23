@@ -31,7 +31,7 @@
                 {% for comment in article.comments %}
                     <li>
                         <div class="comment-wrapper">
-                            <div class="comment-author"><img src="{{ asset('images/user1.jpg') }}" alt="{{ comment.commentator.name }}"> {{ comment.commentator.name }}</div>
+                            <div class="comment-author"><img src="{{ asset('images/anonimous.jpg') }}" alt="{{ comment.commentator.name }}"> {{ comment.commentator.name }}</div>
                             <p>
                                 {{ comment.message }}
                             </p>

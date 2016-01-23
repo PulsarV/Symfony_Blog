@@ -14,12 +14,12 @@ AppBundle\Entity\Commentator:
 
 AppBundle\Entity\Category:
   category{0..2}:
-    name(unique): <sentence()>
+    name(unique): <(rtrim($fake('sentence'), '.'))>
 
 AppBundle\Entity\Article:
   article{0..4}:
-    title: <sentence()>
-    titleImage: <text(25)>.png
+    title: <(rtrim($fake('sentence'), '.'))>
+    titleImage: <image('web/uploads', 550, 250, '', false)>
     content: <text(10000)>
     viewsCounter: <randomNumber(8)>
     ratingCounter: <numberBetween(0, $viewsCounter * 5)>
