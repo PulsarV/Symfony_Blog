@@ -127,9 +127,9 @@ class ArticleController extends Controller
     /**
      * @Route("articles/{page}/search/{slug}", defaults={"page" = 1}, name="article_search")
      * @Method({"GET"})
-     * @Template()
+     * @Template("@App/Article/index.html.twig")
      */
-    public function searchAction($page, $slug)
+    public function indexBySearchResultAction($page, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository('AppBundle:Article')->findAllArticlesBySearchQueryPaginated($slug, ($page - 1) * $this->articlesPerPage, $this->articlesPerPage);
@@ -138,8 +138,6 @@ class ArticleController extends Controller
             'page' => $page,
             'slug' => $slug,
             'pagesCount' => ceil(count($articles) / $this->articlesPerPage),
-        ];
-        return [
         ];
     }
 
