@@ -83,13 +83,13 @@ class Article
     private $viewsCounter;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
      * @Assert\Valid()
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
      * @Assert\Valid()
      */
     private $category;
@@ -120,9 +120,38 @@ class Article
     }
 
     /**
+     * Set rating
+     *
+     * @param integer $rating
+     *
+     * @return Article
+     */
+    public function setRating($rating)
+    {
+        $this->ratingCounter += $rating;
+        $this->viewsCounter += 1;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return float
+     */
+    public function getRating()
+    {
+        if (!$this->ratingCounter) {
+            return 0;
+        } else {
+            return $this->ratingCounter / $this->viewsCounter;
+        }
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -218,7 +247,7 @@ class Article
     /**
      * Get ratingCounter
      *
-     * @return int
+     * @return integer
      */
     public function getRatingCounter()
     {
@@ -242,7 +271,7 @@ class Article
     /**
      * Get viewsCounter
      *
-     * @return int
+     * @return integer
      */
     public function getViewsCounter()
     {
@@ -250,32 +279,27 @@ class Article
     }
 
     /**
-     * Set rating
+     * Set slug
      *
-     * @param integer $rating
+     * @param string $slug
      *
      * @return Article
      */
-    public function setRating($rating)
+    public function setSlug($slug)
     {
-        $this->ratingCounter += $rating;
-        $this->viewsCounter += 1;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * Get rating
+     * Get slug
      *
-     * @return float
+     * @return string
      */
-    public function getRating()
+    public function getSlug()
     {
-        if (!$this->ratingCounter) {
-            return 0;
-        } else {
-            return $this->ratingCounter / $this->viewsCounter;
-        }
+        return $this->slug;
     }
 
     /**
@@ -285,7 +309,7 @@ class Article
      *
      * @return Article
      */
-    public function setAuthor(Author $author)
+    public function setAuthor(Author $author = null)
     {
         $this->author = $author;
 
@@ -309,7 +333,7 @@ class Article
      *
      * @return Article
      */
-    public function setCategory(Category $category)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -327,41 +351,6 @@ class Article
     }
 
     /**
-     * Add comment
-     *
-     * @param Comment $comment
-     *
-     * @return Article
-     */
-    public function addComment(Comment $comment)
-    {
-        $comment->setArticle($this);
-        $this->comments->add($comment);
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param Comment $comment
-     */
-    public function removeComment(Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
      * Add tag
      *
      * @param Tag $tag
@@ -370,8 +359,7 @@ class Article
      */
     public function addTag(Tag $tag)
     {
-        $tag->addArticle($this);
-        $this->tags[] = $tag;
+        $this->tags->add($tag);
 
         return $this;
     }
@@ -397,26 +385,36 @@ class Article
     }
 
     /**
-     * Set slug
+     * Add comment
      *
-     * @param string $slug
+     * @param Comment $comment
      *
      * @return Article
      */
-    public function setSlug($slug)
+    public function addComment(Comment $comment)
     {
-        $this->slug = $slug;
+        $this->comments->add($comment);
 
         return $this;
     }
 
     /**
-     * Get slug
+     * Remove comment
      *
-     * @return string
+     * @param Comment $comment
      */
-    public function getSlug()
+    public function removeComment(Comment $comment)
     {
-        return $this->slug;
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

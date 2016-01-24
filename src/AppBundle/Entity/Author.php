@@ -123,7 +123,7 @@ class Author
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -145,7 +145,7 @@ class Author
     }
 
     /**
-     * Get firstName
+     * Get firstname
      *
      * @return string
      */
@@ -275,6 +275,30 @@ class Author
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Author
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add article
      *
      * @param Article $article
@@ -283,7 +307,7 @@ class Author
      */
     public function addArticle(Article $article)
     {
-        $this->articles[] = $article;
+        $this->articles->add($article);
 
         return $this;
     }
@@ -306,29 +330,5 @@ class Author
     public function getArticles()
     {
         return $this->articles;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Author
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

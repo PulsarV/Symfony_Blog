@@ -67,7 +67,7 @@ class Tag
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -99,6 +99,30 @@ class Tag
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Tag
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add article
      *
      * @param Article $article
@@ -107,7 +131,7 @@ class Tag
      */
     public function addArticle(Article $article)
     {
-        $this->articles[] = $article;
+        $this->articles->add($article);
 
         return $this;
     }
@@ -130,29 +154,5 @@ class Tag
     public function getArticles()
     {
         return $this->articles;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Tag
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

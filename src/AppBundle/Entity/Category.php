@@ -66,7 +66,7 @@ class Category
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -98,6 +98,30 @@ class Category
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add article
      *
      * @param Article $article
@@ -106,7 +130,7 @@ class Category
      */
     public function addArticle(Article $article)
     {
-        $this->articles[] = $article;
+        $this->articles->add($article);
 
         return $this;
     }
@@ -129,29 +153,5 @@ class Category
     public function getArticles()
     {
         return $this->articles;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Category
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

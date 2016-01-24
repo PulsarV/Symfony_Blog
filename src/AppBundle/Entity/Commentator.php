@@ -77,7 +77,7 @@ class Commentator
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -133,6 +133,30 @@ class Commentator
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Commentator
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add comment
      *
      * @param Comment $comment
@@ -141,7 +165,7 @@ class Commentator
      */
     public function addComment(Comment $comment)
     {
-        $this->comments[] = $comment;
+        $this->comments->add($comment);
 
         return $this;
     }
@@ -164,29 +188,5 @@ class Commentator
     public function getComments()
     {
         return $this->comments;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Commentator
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

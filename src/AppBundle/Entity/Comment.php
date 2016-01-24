@@ -43,13 +43,13 @@ class Comment
     private $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commentator", inversedBy="comments", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Commentator", inversedBy="comments")
      * @Assert\Valid()
      */
     private $commentator;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
      * @Assert\Valid()
      */
     private $article;
@@ -60,11 +60,10 @@ class Comment
      */
     private $slug;
 
-
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -93,6 +92,30 @@ class Comment
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Comment
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -126,7 +149,7 @@ class Comment
      *
      * @return Comment
      */
-    public function setArticle(Article $article)
+    public function setArticle(Article $article = null)
     {
         $this->article = $article;
 
@@ -136,34 +159,10 @@ class Comment
     /**
      * Get article
      *
-     * @return Article
+     * @return \AppBundle\Entity\Article
      */
     public function getArticle()
     {
         return $this->article;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Comment
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }
