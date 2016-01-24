@@ -1,5 +1,5 @@
 {% extends '::base_with_right_sidebar.html.twig' %}
-{#{% form_theme commentForm 'bootstrap_3_layout.html.twig' %}#}
+{% form_theme commentForm 'bootstrap_3_layout.html.twig' %}
 
 {% block content %}
     <div class="blog-post">
@@ -44,19 +44,19 @@
                 {% endfor %}
             </ul>
             <!-- Comments Form -->
-            {#<h4>Leave a Comment</h4>#}
-            {#<div>#}
-                {#{{ form_start(commentForm) }}#}
-                {#{{ form_errors(commentForm) }}#}
-                {#{{ form_row(commentForm.commentator.name) }}#}
-                {#{{ form_row(commentForm.commentator.email) }}#}
-                {#{{ form_row(commentForm.message) }}#}
-                {#<div class="form-group">#}
-                    {#<button type="submit" class="btn btn-large pull-right">Send comment</button>#}
-                {#</div>#}
-                {#<div class="clearfix"></div>#}
-                {#{{ form_end(commentForm) }}#}
-            {#</div>#}
+            <h4>Leave a Comment</h4>
+            <div>
+                {{ form_start(commentForm) }}
+                {{ form_errors(commentForm) }}
+                {{ form_row(commentForm.commentator.name) }}
+                {{ form_row(commentForm.commentator.email) }}
+                {{ form_row(commentForm.message) }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-large pull-right">Send comment</button>
+                </div>
+                <div class="clearfix"></div>
+                {{ form_end(commentForm) }}
+            </div>
             <!-- End Comment Form -->
         </div>
         <!-- End Comments -->

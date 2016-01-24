@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Commentator;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Article;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -150,25 +151,22 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('AppBundle:Article')->findArticleBySlug($slug);
+        $comment = new Comment();
+        $commentForm = $this->createForm('AppBundle\Form\CommentType', $comment);
+        $commentForm->handleRequest($request);
+        if ($commentForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $article->getComments()->add($comment);
+            $comment->setArticle($article);
+            $em->persist($comment);
+            $em->flush();
 
-//        $comment = new Comment();
-        //$commentator = new Commentator();
-        //$comment->setArticle($article);
-        //$comment->setCommentator($commentator);
-//        $commentForm = $this->createForm('AppBundle\Form\CommentType', $comment);
-//        $commentForm->handleRequest($request);
-
-//        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($comment);
-//            $em->flush();
-
-//            return $this->redirectToRoute('article_show', ['slug' => $slug]);
-//        }
+            return $this->redirect($this->generateUrl('article_show', ['slug' => $slug]).'#comments');
+        }
 
         return [
             'article' => $article,
-//            'commentForm' => $commentForm->createView(),
+            'commentForm' => $commentForm->createView(),
         ];
     }
 }
