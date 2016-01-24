@@ -3,21 +3,13 @@
     <!-- Blog Post -->
     <div class="col-sm-8">
         {% block content %}
-            <h1>Page content</h1>
+
         {% endblock %}
     </div>
     <!-- End Blog Post -->
     <!-- Sidebar -->
     <div class="col-sm-4 blog-sidebar">
-        <h4>Search our Blog</h4>
-        <form>
-            <div class="input-group">
-                <input class="form-control input-md" id="appendedInputButtons" type="text">
-                <span class="input-group-btn">
-                    <button class="btn btn-md" type="button">Search</button>
-                </span>
-            </div>
-        </form>
+        {{ render(controller('AppBundle:Article:showSearchBlock')) }}
         <h4>Top articles</h4>
         <ul class="link-unit">
             {% for top_article in top_articles() %}

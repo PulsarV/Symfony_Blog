@@ -22,7 +22,10 @@ class ArticleRepository extends EntityRepository
                 LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 ORDER BY ar.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -33,11 +36,15 @@ class ArticleRepository extends EntityRepository
                 FROM AppBundle:Article ar
                 JOIN ar.author au
                 JOIN ar.category ca
-                JOIN ar.tags t
+                LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 WHERE ca.slug = :slug
                 ORDER BY ar.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('slug', $slug)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -48,11 +55,15 @@ class ArticleRepository extends EntityRepository
                 FROM AppBundle:Article ar
                 JOIN ar.author au
                 JOIN ar.category ca
-                JOIN ar.tags t
+                LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 WHERE au.slug = :slug
                 ORDER BY ar.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('slug', $slug)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -63,11 +74,15 @@ class ArticleRepository extends EntityRepository
                 FROM AppBundle:Article ar
                 JOIN ar.author au
                 JOIN ar.category ca
-                JOIN ar.tags t
+                LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 WHERE t.slug = :slug
                 ORDER BY ar.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('slug', $slug)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -78,11 +93,15 @@ class ArticleRepository extends EntityRepository
                 FROM AppBundle:Article ar
                 JOIN ar.author au
                 JOIN ar.category ca
-                JOIN ar.tags t
+                LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 WHERE ar.slug = :slug
                 ORDER BY ar.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('slug', $slug)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -93,10 +112,13 @@ class ArticleRepository extends EntityRepository
                 FROM AppBundle:Article ar
                 JOIN ar.author au
                 JOIN ar.category ca
-                JOIN ar.tags t
+                LEFT JOIN ar.tags t
                 LEFT JOIN ar.comments co
                 WHERE ar.slug = :slug";
-        $query = $this->getEntityManager()->createQuery($dql)->setParameter('slug', $slug)->getOneOrNullResult();
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('slug', $slug)
+            ->getOneOrNullResult();
 
         return $query;
     }
@@ -106,8 +128,32 @@ class ArticleRepository extends EntityRepository
         $dql = "SELECT ar
                 FROM AppBundle:Article ar
                 ORDER BY ar.ratingCounter / ar.viewsCounter DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult(0)->setMaxResults(5)->getResult();
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult(0)
+            ->setMaxResults(5)
+            ->getResult();
 
         return $query;
+    }
+
+    public function findAllArticlesBySearchQueryPaginated($searchQuery, $first, $max)
+    {
+        $dql = "SELECT ar
+                FROM AppBundle:Article ar
+                JOIN ar.author au
+                JOIN ar.category ca
+                LEFT JOIN ar.tags t
+                LEFT JOIN ar.comments co
+                WHERE ar.title LIKE :searchQuery
+                OR  ar.content LIKE :searchQuery
+                ORDER BY ar.createdAt DESC";
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('searchQuery', '%'.$searchQuery.'%')
+            ->setFirstResult($first)
+            ->setMaxResults($max);
+
+        return new Paginator($query);
     }
 }

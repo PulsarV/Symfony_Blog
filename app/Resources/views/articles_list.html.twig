@@ -1,13 +1,19 @@
-{% for article in articles %}
+{% if articles|length > 0 %}
+    {% for article in articles %}
+        <div class="blog-post">
+            {% include '::article_header.html.twig' %}
+            <div class="post-content" id="article-content-{{ loop.index }}">
+                {{ article.content|slice(0, 800) }}
+            </div>
+            {% include '::article_footer.html.twig' %}
+            <div class="post-more">
+                <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn btn-small">Read more</a>
+            </div>
+        </div>
+    {% endfor %}
+    {% include '::pagination.html.twig' %}
+{% else %}
     <div class="blog-post">
-        {% include '::article_header.html.twig' %}
-        <div class="post-content" id="article-content-{{ loop.index }}">
-            {{ article.content|slice(0, 800) }}
-        </div>
-        {% include '::article_footer.html.twig' %}
-        <div class="post-more">
-            <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn btn-small">Read more</a>
-        </div>
+        <h4>Unfortunately nothing found</h4>
     </div>
-{% endfor %}
-{% include '::pagination.html.twig' %}
+{% endif %}
