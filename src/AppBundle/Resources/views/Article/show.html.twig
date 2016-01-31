@@ -1,6 +1,5 @@
 {% extends '::base_with_right_sidebar.html.twig' %}
 {% form_theme commentForm 'bootstrap_3_layout.html.twig' %}
-
 {% block content %}
     <div class="blog-post">
         {% include '::article_header.html.twig' %}
@@ -8,21 +7,35 @@
             {{ article.content }}
         </div>
         {% include '::article_footer.html.twig' %}
-        <h4>Put estimate for this article</h4>
+        <h4>Rate this article</h4>
+        <!-- Rating -->
         <div class="set-rating-block">
-            <form class=""  onclick="">
-                <div class="form-group text-center">
-                    <label class="star-radio" for="r1"><input type="radio" name="rating" value="1" id="r1" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
-                    <label class="star-radio" for="r2"><input type="radio" name="rating" value="2" id="r2" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
-                    <label class="star-radio" for="r3"><input type="radio" name="rating" value="3" id="r3" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
-                    <label class="star-radio" for="r4"><input type="radio" name="rating" value="4" id="r4" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
-                    <label class="star-radio" for="r5"><input type="radio" name="rating" value="5" id="r5" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div></label>
-                </div>
-                <div class="rating-submit">
-                    <button type="submit" class="btn btn-small">Estimate</button>
-                </div>
-            </form>
+            {{ form_start(ratingForm, {'label': 'adasd', 'attr': {'onclick': ''}}) }}
+                {%- block choice_widget_expanded -%}
+                    <div {{ block('widget_container_attributes') }}>
+                        {%- for child in ratingForm %}
+                            {% if child.vars.name == 'rating' %}
+                                <div class="form-group text-center">
+                                    {%- for radioButton in child %}
+                                        {%- block form_label %}
+                                            <label class="star-radio" class="required" for="{{ radioButton.vars.id }}">
+                                                {%- block form_widget -%}
+                                                    <input type="radio" name="{{ radioButton.vars.full_name }}" required="required" value="{{ radioButton.vars.value }}" id="{{ radioButton.vars.id }}" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div>
+                                                {%- endblock -%}
+                                            </label>
+                                        {% endblock -%}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor -%}
+                    </div>
+                {%- endblock choice_widget_expanded -%}
+            <div class="rating-submit">
+                <button type="submit" class="btn btn-small">Rate</button>
+            </div>
+            {{ form_end(ratingForm) }}
         </div>
+        <!-- Rating -->
         <!-- Comments -->
         <a id="comments"></a>
         <div class="post-coments">

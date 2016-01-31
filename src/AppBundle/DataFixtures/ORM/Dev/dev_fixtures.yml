@@ -21,7 +21,7 @@ AppBundle\Entity\Article:
     title: <(rtrim($fake('sentence'), '.'))>
     titleImage: <image('web/uploads', 550, 250, '', false)>
     content: <text(10000)>
-    viewsCounter: <randomNumber(8)>
+    viewsCounter: <randomNumber(2)>
     ratingCounter: <numberBetween(0, $viewsCounter * 5)>
     author: @author*
     category: @category*

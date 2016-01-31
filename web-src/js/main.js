@@ -1,10 +1,9 @@
 function changeRatingValue(){
-    for (var i = 1; i <= 5; i++) {
-        if (i <= $('input[name=rating]:checked').val()) {
-            $("label[for='r" + i + "']").addClass('star-is-checked');
+    for (var i = 0; i < 5; i++) {
+        if (i <= $('input[name="form[rating]"]:checked').val() - 1) {
+            $("label[for='form_rating_" + i + "']").addClass('star-is-checked');
         } else {
-            $("label[for='r" + i + "']").removeClass('star-is-checked');
+            $("label[for='form_rating_" + i + "']").removeClass('star-is-checked');
         }
-
     }
 }

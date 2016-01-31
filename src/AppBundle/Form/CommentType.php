@@ -17,8 +17,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('commentator', CommentatorType::class)
-            ->add('message', TextareaType::class, ['label' => 'Your Message'])
-        ;
+            ->add('message', TextareaType::class, [
+                'label' => 'Your Message',
+                'attr' => ['rows' => 5]
+            ]);
     }
 
     /**
