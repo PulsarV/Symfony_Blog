@@ -12,7 +12,7 @@ class AdminTagController extends Controller
     protected $tagsPerPage = 25;
 
     /**
-     * @Route("/config/tags/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_tag_index")
+     * @Route("/admin/tags/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_tag_index")
      * @Method({"GET"})
      * @Template()
      */

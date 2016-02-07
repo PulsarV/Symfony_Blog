@@ -7,35 +7,37 @@
             {{ article.content }}
         </div>
         {% include '::article_footer.html.twig' %}
-        <h4>Rate this article</h4>
-        <!-- Rating -->
-        <div class="set-rating-block">
-            {{ form_start(ratingForm, {'label': 'adasd', 'attr': {'onclick': ''}}) }}
-                {%- block choice_widget_expanded -%}
-                    <div {{ block('widget_container_attributes') }}>
-                        {%- for child in ratingForm %}
-                            {% if child.vars.name == 'rating' %}
-                                <div class="form-group text-center">
-                                    {%- for radioButton in child %}
-                                        {%- block form_label %}
-                                            <label class="star-radio" class="required" for="{{ radioButton.vars.id }}">
-                                                {%- block form_widget -%}
-                                                    <input type="radio" name="{{ radioButton.vars.full_name }}" required="required" value="{{ radioButton.vars.value }}" id="{{ radioButton.vars.id }}" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div>
-                                                {%- endblock -%}
-                                            </label>
-                                        {% endblock -%}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endfor -%}
-                    </div>
-                {%- endblock choice_widget_expanded -%}
-            <div class="rating-submit">
-                <button type="submit" class="btn btn-small">Rate</button>
+        {% if app.user %}
+            <h4>Rate this article</h4>
+            <!-- Rating -->
+            <div class="set-rating-block">
+                {{ form_start(ratingForm, {'label': 'adasd', 'attr': {'onclick': ''}}) }}
+                    {%- block choice_widget_expanded -%}
+                        <div {{ block('widget_container_attributes') }}>
+                            {%- for child in ratingForm %}
+                                {% if child.vars.name == 'rating' %}
+                                    <div class="form-group text-center">
+                                        {%- for radioButton in child %}
+                                            {%- block form_label %}
+                                                <label class="star-radio" class="required" for="{{ radioButton.vars.id }}">
+                                                    {%- block form_widget -%}
+                                                        <input type="radio" name="{{ radioButton.vars.full_name }}" required="required" value="{{ radioButton.vars.value }}" id="{{ radioButton.vars.id }}" onchange="changeRatingValue()"><div class="glyphicon glyphicon-star"></div>
+                                                    {%- endblock -%}
+                                                </label>
+                                            {% endblock -%}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endfor -%}
+                        </div>
+                    {%- endblock choice_widget_expanded -%}
+                <div class="rating-submit">
+                    <button type="submit" class="btn btn-small">Rate</button>
+                </div>
+                {{ form_end(ratingForm) }}
             </div>
-            {{ form_end(ratingForm) }}
-        </div>
-        <!-- Rating -->
+            <!-- Rating -->
+        {% endif %}
         <!-- Comments -->
         <a id="comments"></a>
         <div class="post-coments">
@@ -56,21 +58,23 @@
                     </li>
                 {% endfor %}
             </ul>
-            <!-- Comments Form -->
-            <h4>Leave a Comment</h4>
-            <div>
-                {{ form_start(commentForm) }}
-                {{ form_errors(commentForm) }}
-                {{ form_row(commentForm.commentator.name) }}
-                {{ form_row(commentForm.commentator.email) }}
-                {{ form_row(commentForm.message) }}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-large pull-right">Send comment</button>
+            {% if app.user %}
+                <!-- Comments Form -->
+                <h4>Leave a Comment</h4>
+                <div>
+                    {{ form_start(commentForm) }}
+                    {{ form_errors(commentForm) }}
+                    {{ form_row(commentForm.commentator.name) }}
+                    {{ form_row(commentForm.commentator.email) }}
+                    {{ form_row(commentForm.message) }}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-large pull-right">Send comment</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    {{ form_end(commentForm) }}
                 </div>
-                <div class="clearfix"></div>
-                {{ form_end(commentForm) }}
-            </div>
-            <!-- End Comment Form -->
+                <!-- End Comment Form -->
+            {% endif %}
         </div>
         <!-- End Comments -->
     </div>

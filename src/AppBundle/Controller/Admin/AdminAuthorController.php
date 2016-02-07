@@ -12,7 +12,7 @@ class AdminAuthorController extends Controller
     protected $autorsPerPage = 25;
 
     /**
-     * @Route("/config/authors/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_author_index")
+     * @Route("/admin/authors/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_author_index")
      * @Method({"GET"})
      * @Template()
      */

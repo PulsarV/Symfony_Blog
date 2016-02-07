@@ -15,7 +15,7 @@ class AdminArticleController extends Controller
     protected $articlesPerPage = 25;
 
     /**
-     * @Route("/config/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_article_index")
+     * @Route("/admin/articles/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_article_index")
      * @Method({"GET"})
      * @Template()
      */
@@ -33,7 +33,7 @@ class AdminArticleController extends Controller
     }
 
     /**
-     * @Route("/config/articles/new", name="admin_article_new")
+     * @Route("/admin/articles/new", name="admin_article_new")
      * @Method({"GET", "POST"})
      * @Template()
      */
@@ -63,7 +63,7 @@ class AdminArticleController extends Controller
     }
 
     /**
-     * @Route("/config/articles/{slug}/edit", name="admin_article_edit")
+     * @Route("/admin/articles/{slug}/edit", name="admin_article_edit")
      * @Method({"GET", "POST"})
      * @Template()
      */

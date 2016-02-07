@@ -1,0 +1,13 @@
+{% extends '::base_security.html.twig' %}
+{% form_theme registerForm 'bootstrap_3_layout.html.twig' %}
+{% block content %}
+    <h4>User registration</h4>
+    <br>
+    {{ form_start(registerForm) }}
+        {{ form_widget(registerForm) }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-large pull-right">Register</button>
+        </div>
+        <div class="clearfix"></div>
+    {{ form_end(registerForm) }}
+{% endblock %}

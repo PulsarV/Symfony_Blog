@@ -93,6 +93,16 @@ class Author implements UserInterface, \Serializable
     private $username;
 
     /**
+     * @Assert\Length(
+     *     min = 8,
+     *     max = 32,
+     *     minMessage = "Password must be at least {{ limit }} characters long",
+     *     maxMessage = "Password cannot be longer than {{ limit }} characters"
+     * )
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="string", length=64)
      */
     private $password;
@@ -272,6 +282,22 @@ class Author implements UserInterface, \Serializable
     public function getSalt()
     {
         return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**

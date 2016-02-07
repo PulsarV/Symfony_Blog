@@ -5,7 +5,7 @@ AppBundle\Entity\Author:
     birthday: <(new \DateTime($fake('date')))>
     address: <address()>
     username(unique): <userName()>
-    password: Qwerty123
+    password: $2y$13$0q3SOoOlxBGYEQnmbQeCl.nef4GIiUIJNKyil18v6OCIP8G8Eq3su
     email(unique): <email()>
 
 AppBundle\Entity\Commentator:

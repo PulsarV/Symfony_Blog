@@ -14,7 +14,7 @@ class AdminCategoryController extends Controller
     protected $categoriesPerPage = 25;
 
     /**
-     * @Route("/config/categories/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_category_index")
+     * @Route("/admin/categories/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_category_index")
      * @Method({"GET"})
      * @Template()
      */

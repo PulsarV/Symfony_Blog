@@ -12,7 +12,7 @@ class AdminCommentController extends Controller
     protected $commentsPerPage = 25;
 
     /**
-     * @Route("/config/comments/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_comment_index")
+     * @Route("/admin/comments/{page}", requirements={"page": "\d+"}, defaults={"page" = 1}, name="admin_comment_index")
      * @Method({"GET"})
      * @Template()
      */

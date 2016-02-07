@@ -42,7 +42,13 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a href="#">Login</a></li>
+                                <li>
+                                    {% if app.user %}
+                                        <b>{{ app.user.username }}</b> > <a href="{{ path('admin_logout') }}">Logout</a>
+                                    {% else %}
+                                        <a href="{{ path('admin_login') }}">Login</a> / <a href="{{ path('admin_registration') }}">Registration</a>
+                                    {% endif %}
+                                </li>
                                 <li class="menu-img"><a href="{{ path('admin_index_page') }}"><i class="glyphicon glyphicon-cog"></i></a></li>
                             </ul>
                         </div>
