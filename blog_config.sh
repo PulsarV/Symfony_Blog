@@ -4,26 +4,28 @@
 clear
 echo "Select action:"
 echo "1 - Install blog (full configuration and load fixtures)"
-echo "2 - Recreate database and load fixtures"
-echo "3 - Recreate database"
-echo "4 - Load fixtures"
-echo "5 - Quit"
+echo "2 - Reinstall backend"
+echo "3 - Reinstall frontend"
+echo "4 - Recreate database and load fixtures"
+echo "5 - Recreate database"
+echo "6 - Load fixtures"
+echo "7 - Exit"
 
 read Keypress
 
 case "$Keypress" in
 1)
     echo
-    echo SETUP BACKEND ...
-    echo =================
+    echo INSTALLING BACKEND ...
+    echo ======================
     composer install
     rm -rf app/cache/*
     rm -rf app/logs/*
     setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
     setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
     echo
-    echo SETUP FRONTEND ...
-    echo ==================
+    echo INSTALLING FRONTEND ...
+    echo =======================
     npm install -S bower gulp less gulp-less gulp-clean gulp-concat gulp-uglify
     ./node_modules/.bin/bower install -S bootstrap
     ./node_modules/.bin/gulp
@@ -39,31 +41,48 @@ case "$Keypress" in
 ;;
 2)
     echo
-    echo RECREATE DATABASE ...
-    echo ==================
-    ./app/console doctrine:database:drop --force
-    ./app/console doctrine:database:create
-    ./app/console doctrine:schema:update --force
-    echo
-    echo LOAD FIXTURES ...
-    echo =================
-    ./app/console hautelook_alice:doctrine:fixtures:load --no-interaction
+    echo REINSTALLING BACKEND ...
+    echo ========================
+    composer install
+    rm -rf app/cache/*
+    rm -rf app/logs/*
+    setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
+    setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
 ;;
 3)
+    echo REINSTALLING FRONTEND ...
+    echo =========================
+    npm install -S bower gulp less gulp-less gulp-clean gulp-concat gulp-uglify
+    ./node_modules/.bin/bower install -S bootstrap
+    ./node_modules/.bin/gulp
+;;
+4)
     echo
     echo RECREATE DATABASE ...
-    echo ==================
+    echo =====================
     ./app/console doctrine:database:drop --force
     ./app/console doctrine:database:create
     ./app/console doctrine:schema:update --force
-;;
-4)
     echo
     echo LOAD FIXTURES ...
     echo =================
     ./app/console hautelook_alice:doctrine:fixtures:load --no-interaction
 ;;
 5)
+    echo
+    echo RECREATE DATABASE ...
+    echo =====================
+    ./app/console doctrine:database:drop --force
+    ./app/console doctrine:database:create
+    ./app/console doctrine:schema:update --force
+;;
+6)
+    echo
+    echo LOAD FIXTURES ...
+    echo =================
+    ./app/console hautelook_alice:doctrine:fixtures:load --no-interaction
+;;
+7)
     exit 0
 ;;
 *)
