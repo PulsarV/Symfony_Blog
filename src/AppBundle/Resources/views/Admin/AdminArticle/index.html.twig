@@ -20,7 +20,7 @@
                     <td class="text-center"><a href="{{ path('admin_article_edit', {'slug': article.slug}) }}"><i class="glyphicon glyphicon-list-alt"></i></a></td>
                     <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
                     <td>{{ article.title }}</td>
-                    <td>{{ article.author.nickname }}</td>
+                    <td>{{ article.author.username }}</td>
                     <td>{{ article.createdAt|date("d M, Y") }}</td>
                     <td>{{ article.updatedAt|date("d M, Y") }}</td>
             </tr>

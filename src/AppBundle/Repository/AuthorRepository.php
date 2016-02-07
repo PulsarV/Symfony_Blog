@@ -19,7 +19,10 @@ class AuthorRepository extends EntityRepository
                 FROM AppBundle:Author au
                 LEFT JOIN au.articles ar
                 ORDER BY au.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }

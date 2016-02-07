@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="author")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AuthorRepository")
  */
-class Author
+class Author implements UserInterface, \Serializable
 {
     /**
      * Hook timestampable behavior
@@ -81,15 +82,25 @@ class Author
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=32, unique=true)
+     * @ORM\Column(name="username", type="string", length=32, unique=true)
      * @Assert\Length(
      *     min = 1,
      *     max = 32,
-     *     minMessage = "Nickname must be at least {{ limit }} characters long",
-     *     maxMessage = "Nickname cannot be longer than {{ limit }} characters"
+     *     minMessage = "Username must be at least {{ limit }} characters long",
+     *     maxMessage = "Username cannot be longer than {{ limit }} characters"
      * )
      */
-    private $nickname;
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     /**
      * @var string
@@ -109,7 +120,7 @@ class Author
     private $articles;
 
     /**
-     * @Gedmo\Slug(fields={"nickname"})
+     * @Gedmo\Slug(fields={"username"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
@@ -117,6 +128,7 @@ class Author
 
     public function __construct()
     {
+        $this->isActive = true;
         $this->articles = new ArrayCollection();
     }
 
@@ -227,27 +239,44 @@ class Author
     }
 
     /**
-     * Set nickname
+     * Set username
      *
-     * @param string $nickname
+     * @param string $username
      *
      * @return Author
      */
-    public function setNickname($nickname)
+    public function setUsername($username)
     {
-        $this->nickname = $nickname;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get nickname
+     * Get username
      *
      * @return string
      */
-    public function getNickname()
+    public function getUsername()
     {
-        return $this->nickname;
+        return $this->username;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
@@ -272,6 +301,39 @@ class Author
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+        ]);
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password
+            ) = unserialize($serialized);
     }
 
     /**
@@ -330,5 +392,43 @@ class Author
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return Author
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Author
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }
