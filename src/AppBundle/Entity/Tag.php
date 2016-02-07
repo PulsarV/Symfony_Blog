@@ -48,7 +48,6 @@ class Tag
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
      * @ORM\JoinTable(name="tags_articles")
-     * @Assert\Valid()
      */
     private $articles;
 

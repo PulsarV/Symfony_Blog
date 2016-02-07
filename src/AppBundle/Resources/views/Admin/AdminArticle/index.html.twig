@@ -8,7 +8,7 @@
                 </div>
             </caption>
             <tr class="text-center">
-                <th class="column col-sm-1 text-center" colspan="2"><a href="#"><i class="glyphicon glyphicon-plus"></i></a></th>
+                <th class="column col-sm-1 text-center" colspan="2"><a href="{{ path('admin_article_new') }}"><i class="glyphicon glyphicon-plus"></i></a></th>
                 <th class="column col-sm-3 text-center">Article title</th>
                 <th class="column col-sm-2 text-center">Author</th>
                 <th class="column col-sm-1 text-center">Created</th>
@@ -17,7 +17,7 @@
             </tr>
             {% for article in articles %}
                 <tr>
-                    <td class="text-center"><a href="#"><i class="glyphicon glyphicon-list-alt"></i></a></td>
+                    <td class="text-center"><a href="{{ path('admin_article_edit', {'slug': article.slug}) }}"><i class="glyphicon glyphicon-list-alt"></i></a></td>
                     <td class="text-center"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
                     <td>{{ article.title }}</td>
                     <td>{{ article.author.nickname }}</td>

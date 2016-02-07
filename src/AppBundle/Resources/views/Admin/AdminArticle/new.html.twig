@@ -2,11 +2,11 @@
 {% form_theme newForm 'bootstrap_3_layout.html.twig' %}
 {% block content %}
     <div class="blog-post">
-        <h4>Add new category</h4>
+        <h4>Add new article</h4>
         <div>
             {{ form_start(newForm) }}
-            {{ form_errors(newForm) }}
-            {{ form_row(newForm.name) }}
+            {{ form_widget(newForm) }}
+
             <div class="form-group">
                 <button type="submit" class="btn btn-large pull-right">Save</button>
             </div>

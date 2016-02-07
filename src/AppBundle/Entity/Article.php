@@ -84,25 +84,21 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
-     * @Assert\Valid()
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
-     * @Assert\Valid()
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", mappedBy="articles")
-     * @Assert\Valid()
      */
     private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
-     * @Assert\Valid()
      */
     private $comments;
 
@@ -237,7 +233,7 @@ class Article
      *
      * @return Article
      */
-    public function setRatingCounter($ratingCounter)
+    public function setRatingCounter($ratingCounter = 0)
     {
         $this->ratingCounter = $ratingCounter;
 
@@ -261,7 +257,7 @@ class Article
      *
      * @return Article
      */
-    public function setViewsCounter($viewsCounter)
+    public function setViewsCounter($viewsCounter = 0)
     {
         $this->viewsCounter = $viewsCounter;
 
