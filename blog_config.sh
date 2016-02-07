@@ -17,6 +17,10 @@ case "$Keypress" in
     echo SETUP BACKEND ...
     echo =================
     composer install
+    rm -rf app/cache/*
+    rm -rf app/logs/*
+    setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
+    setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
     echo
     echo SETUP FRONTEND ...
     echo ==================
