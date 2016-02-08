@@ -52,7 +52,11 @@
                             </p>
                             <!-- Comment Controls -->
                             <div class="comment-actions">
-                                <span class="comment-date">{{ comment.createdAt|date("d M, Y") }}</span>
+                                <span class="comment-date">
+                                    <a href=""><i class="glyphicon glyphicon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
+                                    <a href=""><i class="glyphicon glyphicon-remove"></i></a>&nbsp;&nbsp;&nbsp;
+                                    {{ comment.createdAt|date("d M, Y") }}
+                                </span>
                             </div>
                         </div>
                     </li>

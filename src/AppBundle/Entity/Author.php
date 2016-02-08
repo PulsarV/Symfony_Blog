@@ -108,6 +108,11 @@ class Author implements UserInterface, \Serializable
     private $password;
 
     /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -150,6 +155,7 @@ class Author implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+        $this->roles[] = 'ROLE_USER';
         $this->articles = new ArrayCollection();
         $this->ratedArticles = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -385,11 +391,42 @@ class Author implements UserInterface, \Serializable
         return $this->email;
     }
 
-    public function getRoles()
+    /**
+     * @param $role
+     * @return $this
+     */
+    public function addRole($role)
     {
-        return ['ROLE_USER'];
+        if (!in_array($role, $this->roles)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
     }
 
+    /**
+     * @param $role
+     */
+    public function removeRole($role)
+    {
+        $key = array_search($role, $this->roles);
+        if (false !== $key)
+        {
+            unset($this->roles[$key]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     *
+     */
     public function eraseCredentials()
     {
     }
