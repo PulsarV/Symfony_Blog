@@ -8,11 +8,6 @@ AppBundle\Entity\Author:
     password: $2y$13$0q3SOoOlxBGYEQnmbQeCl.nef4GIiUIJNKyil18v6OCIP8G8Eq3su
     email(unique): <email()>
 
-AppBundle\Entity\Commentator:
-  commentator{0..2}:
-    name: <firstName()> <lastName()>
-    email(unique): <email()>
-
 AppBundle\Entity\Category:
   category{0..2}:
     name(unique): <(rtrim($fake('sentence'), '.'))>
@@ -27,13 +22,13 @@ AppBundle\Entity\Article:
     author: @author*
     category: @category*
 
+AppBundle\Entity\Comment:
+  comment{0..20}:
+    message: <text(300)>
+    author: @author*
+    article: @article*
+
 AppBundle\Entity\Tag:
   tag{0..8}:
     name(unique): <word()>
     articles: <numberBetween(1, 10)>x @article*
-
-AppBundle\Entity\Comment:
-  comment{0..20}:
-    message: <text(300)>
-    commentator: @commentator*
-    article: @article*

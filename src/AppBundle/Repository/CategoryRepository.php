@@ -19,7 +19,10 @@ class CategoryRepository extends EntityRepository
                 FROM AppBundle:Category ca
                 LEFT JOIN ca.articles ar
                 ORDER BY ca.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -29,7 +32,9 @@ class CategoryRepository extends EntityRepository
         $dql = "SELECT ca
                 FROM AppBundle:Category ca
                 ORDER BY ca.name ASC";
-        $query = $this->getEntityManager()->createQuery($dql)->getResult();
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->getResult();
 
         return $query;
     }

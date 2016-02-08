@@ -19,7 +19,10 @@ class TagRepository extends EntityRepository
                 FROM AppBundle:Tag t
                 LEFT JOIN t.articles ar
                 ORDER BY t.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }

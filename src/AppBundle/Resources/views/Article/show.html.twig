@@ -7,7 +7,7 @@
             {{ article.content }}
         </div>
         {% include '::article_footer.html.twig' %}
-        {% if app.user %}
+        {% if app.user and ratingForm is defined %}
             <h4>Rate this article</h4>
             <!-- Rating -->
             <div class="set-rating-block">
@@ -46,7 +46,7 @@
                 {% for comment in article.comments %}
                     <li>
                         <div class="comment-wrapper">
-                            <div class="comment-author"><img src="{{ asset('images/anonimous.jpg') }}" alt="{{ comment.commentator.name }}"> {{ comment.commentator.name }}</div>
+                            <div class="comment-author"><img src="{{ asset('images/anonimous.jpg') }}" alt="{{ comment.author.username }}"> {{ comment.author.username }}</div>
                             <p>
                                 {{ comment.message }}
                             </p>
@@ -64,8 +64,6 @@
                 <div>
                     {{ form_start(commentForm) }}
                     {{ form_errors(commentForm) }}
-                    {{ form_row(commentForm.commentator.name) }}
-                    {{ form_row(commentForm.commentator.email) }}
                     {{ form_row(commentForm.message) }}
                     <div class="form-group">
                         <button type="submit" class="btn btn-large pull-right">Send comment</button>

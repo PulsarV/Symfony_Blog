@@ -43,10 +43,10 @@ class Comment
     private $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commentator", inversedBy="comments", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="comments", cascade={"persist"})
      * @Assert\Valid()
      */
-    private $commentator;
+    private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments", cascade={"persist"})
@@ -119,27 +119,27 @@ class Comment
     }
 
     /**
-     * Set commentator
+     * Set author
      *
-     * @param Commentator $commentator
+     * @param Author $author
      *
      * @return Comment
      */
-    public function setCommentator(Commentator $commentator = null)
+    public function setAuthor(Author $author = null)
     {
-        $this->commentator = $commentator;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get commentator
+     * Get author
      *
-     * @return Commentator
+     * @return Author
      */
-    public function getCommentator()
+    public function getAuthor()
     {
-        return $this->commentator;
+        return $this->author;
     }
 
     /**

@@ -11,9 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends Controller
 {
@@ -151,26 +149,9 @@ class ArticleController extends Controller
      */
     public function showAction(Request $request, $slug)
     {
+        $currentAuthor = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('AppBundle:Article')->findArticleBySlug($slug);
-
-        $ratingForm = $this->createFormBuilder()
-            ->add('rating', ChoiceType::class, [
-                'attr' => ['hidden' => true],
-                'label' => false,
-                'expanded' => true,
-                'multiple' => false,
-                'choices' => ['1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5],
-                'choices_as_values' => true,
-            ])
-            ->getForm();
-        $ratingForm->handleRequest($request);
-        if ($ratingForm->isValid()) {
-            $article->setRating($ratingForm->getData()['rating']);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('article_show', ['slug' => $slug]).'#comments');
-        }
 
         $comment = new Comment();
         $commentForm = $this->createForm('AppBundle\Form\CommentType', $comment);
@@ -179,15 +160,42 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $article->getComments()->add($comment);
             $comment->setArticle($article);
+            $comment->setAuthor($currentAuthor);
             $em->persist($comment);
             $em->flush();
 
             return $this->redirect($this->generateUrl('article_show', ['slug' => $slug]).'#comments');
         }
 
+        if (!$article->getRaters()->contains($currentAuthor)) {
+            $ratingForm = $this->createFormBuilder()
+                ->add('rating', ChoiceType::class, [
+                    'attr' => ['hidden' => true],
+                    'label' => false,
+                    'expanded' => true,
+                    'multiple' => false,
+                    'choices' => ['1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5],
+                    'choices_as_values' => true,
+                ])
+                ->getForm();
+
+            $ratingForm->handleRequest($request);
+            if ($ratingForm->isValid()) {
+                $article->setRating($ratingForm->getData()['rating']);
+                $article->addRater($currentAuthor);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('article_show', ['slug' => $slug]).'#comments');
+            }
+            return [
+                'article' => $article,
+                'ratingForm' => $ratingForm->createView(),
+                'commentForm' => $commentForm->createView(),
+            ];
+        }
+
         return [
             'article' => $article,
-            'ratingForm' => $ratingForm->createView(),
             'commentForm' => $commentForm->createView(),
         ];
     }

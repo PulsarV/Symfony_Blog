@@ -130,6 +130,17 @@ class Author implements UserInterface, \Serializable
     private $articles;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="raters")
+     */
+    private $ratedArticles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
+     * @Assert\Valid()
+     */
+    private $comments;
+
+    /**
      * @Gedmo\Slug(fields={"username"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
@@ -140,6 +151,8 @@ class Author implements UserInterface, \Serializable
     {
         $this->isActive = true;
         $this->articles = new ArrayCollection();
+        $this->ratedArticles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -461,5 +474,73 @@ class Author implements UserInterface, \Serializable
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Add ratedArticle
+     *
+     * @param Article $article
+     *
+     * @return Author
+     */
+    public function addRatedArticle(Article $article)
+    {
+        $this->ratedArticles->add($article);
+
+        return $this;
+    }
+
+    /**
+     * Remove ratedArticle
+     *
+     * @param Article $article
+     */
+    public function removeRatedArticle(Article $article)
+    {
+        $this->ratedArticles->removeElement($article);
+    }
+
+    /**
+     * Get ratedArticles
+     *
+     * @return Collection
+     */
+    public function getRatedArticles()
+    {
+        return $this->ratedArticles;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param Comment $comment
+     *
+     * @return Author
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments->add($comment);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

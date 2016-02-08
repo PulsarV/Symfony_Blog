@@ -17,9 +17,12 @@ class CommentRepository extends EntityRepository
     {
         $dql = "SELECT co
                 FROM AppBundle:Comment co
-                JOIN co.commentator cr
+                JOIN co.author au
                 ORDER BY co.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult($first)->setMaxResults($max);
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult($first)
+            ->setMaxResults($max);
 
         return new Paginator($query);
     }
@@ -29,7 +32,11 @@ class CommentRepository extends EntityRepository
         $dql = "SELECT co
                 FROM AppBundle:Comment co
                 ORDER BY co.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)->setFirstResult(0)->setMaxResults(5)->getResult();
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setFirstResult(0)
+            ->setMaxResults(5)
+            ->getResult();
 
         return $query;
     }

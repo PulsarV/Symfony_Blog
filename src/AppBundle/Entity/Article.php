@@ -88,6 +88,12 @@ class Article
     private $author;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Author", inversedBy="ratedArticles")
+     * @ORM\JoinTable(name="raters_articles")
+     */
+    private $raters;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
      */
     private $category;
@@ -111,6 +117,7 @@ class Article
 
     public function __construct()
     {
+        $this->raters = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -320,6 +327,41 @@ class Article
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set rater
+     *
+     * @param Author $rater
+     *
+     * @return Article
+     */
+    public function addRater(Author $rater)
+    {
+
+        $this->raters->add($rater);
+
+        return $this;
+    }
+
+    /**
+     * Remove rater
+     *
+     * @param Author $rater
+     */
+    public function removeRater(Author $rater)
+    {
+        $this->raters->removeElement($rater);
+    }
+
+    /**
+     * Get raters
+     *
+     * @return Collection
+     */
+    public function getRaters()
+    {
+        return $this->raters;
     }
 
     /**
