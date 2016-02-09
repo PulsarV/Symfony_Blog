@@ -13,3 +13,5 @@ To install, follow these steps:
 1. Run git clone https://github.com/PulsarV/Symfony_Blog.git %project_directory%
 2. Change current directory to %project_directory%
 3. Run ./blog_config.sh
+
+P.S.: Password for all exists users is Qwerty123 . Admin zone is broken :(
