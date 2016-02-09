@@ -43,14 +43,12 @@ class Comment
     private $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Author", inversedBy="comments", cascade={"persist"})
-     * @Assert\Valid()
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="comments")
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments", cascade={"persist"})
-     * @Assert\Valid()
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
      */
     private $article;
 

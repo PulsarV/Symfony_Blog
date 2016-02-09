@@ -40,4 +40,17 @@ class CommentRepository extends EntityRepository
 
         return $query;
     }
+
+    public function findCommentBySlug($slug)
+    {
+        $dql = "SELECT co
+                FROM AppBundle:Comment co
+                WHERE co.slug = :slug";
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('slug', $slug)
+            ->getOneOrNullResult();
+
+        return $query;
+    }
 }

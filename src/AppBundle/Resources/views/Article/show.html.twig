@@ -53,8 +53,12 @@
                             <!-- Comment Controls -->
                             <div class="comment-actions">
                                 <span class="comment-date">
-                                    <a href=""><i class="glyphicon glyphicon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
-                                    <a href=""><i class="glyphicon glyphicon-remove"></i></a>&nbsp;&nbsp;&nbsp;
+                                    {% if is_granted('edit', comment) %}
+                                        <a href="{{ path('comment_edit', {'articleSlug': comment.article.slug, 'commentSlug': comment.slug}) }}"><i class="glyphicon glyphicon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
+                                    {% endif %}
+                                    {% if is_granted('delete', comment) %}
+                                        <a href="{{ path('comment_delete', {'articleSlug': comment.article.slug, 'commentSlug': comment.slug}) }}"><i class="glyphicon glyphicon-remove"></i></a>&nbsp;&nbsp;&nbsp;
+                                    {% endif %}
                                     {{ comment.createdAt|date("d M, Y") }}
                                 </span>
                             </div>

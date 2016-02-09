@@ -1,0 +1,16 @@
+{% extends '::base_with_right_sidebar.html.twig' %}
+{% form_theme editForm 'bootstrap_3_layout.html.twig' %}
+{% block content %}
+    <div class="blog-post">
+        <h4>Edit comment</h4>
+        <br>
+        {{ form_start(editForm) }}
+        {{ form_widget(editForm) }}
+        <div class="form-group">
+            <a class="btn btn-large pull-left" href="{{ path('article_show', {'slug': articleSlug}) }}" role="button">Cancel</a>
+            <button type="submit" class="btn btn-large pull-right">Save</button>
+        </div>
+        <div class="clearfix"></div>
+        {{ form_end(editForm) }}
+    </div>
+{% endblock %}
